@@ -1,0 +1,44 @@
+1. chfs -a size=+1G (filesystem name) - command to extend FS on aix server
+   twausxdb2pg01:/ ] df -gt /usr
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd2           5.81      4.69      1.12   81% /usr
+twausxdb2pg01:/ ]
+
+--------------------------------------------------------------------------------------------------
+2. RE: Filesystem_Websphere_Space_Alert_/usr/WebSphere850 on twauslwas45.app.test.hcscint.net
+
+df -h /usr/WebSphere850
+  564  cd /usr/WebSphere850
+  565  du -sh *
+  566  ls -lrth
+  567  cd AppServer
+  568  du -sh *
+  569  cd ..
+  570  du -sh *
+  571  ls -lrth
+  572  df -h /usr/WebSphere850
+  573  du -sh *
+  574  ls -lrth
+  575  exec /bin/sh -
+  576  stty -echo
+  577  PS1=[PROMPT]#&&PS2=
+  578  exit
+  579  cd /usr/WebSphere850
+  580  df -h
+  581  df -hT /usr/WebSphere850
+  582  vgs
+  583  du -sh *
+  584  cd AppServer
+  585  du -sh *
+  586  du -sh * | sort -rn | head
+  587  cd
+  588  cd -
+  589  cd ..
+  590  ls -ltr
+  591  rm AppServer.bak
+  592  rm AppServer20220424.tar
+  593  df -h
+  594  ls -ltr
+  595  df -hT /usr/WebSphere850
+---------------------------------------------------------------------------------------------------------------
+

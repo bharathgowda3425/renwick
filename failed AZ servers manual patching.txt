@@ -1,0 +1,87 @@
+[root@paznslcimap26 ~]# cd /tmp
+[root@paznslcimap26 tmp]# vi output.sh
+[root@paznslcimap26 tmp]# chmod 755 /tmp/output.sh;./output.sh > `hostname`.output.txt 2>&1;echo " backup before shutdown " |mail -a `hostname`.output.txt -s "`hostname`.outputs " MSP_IMS_UNIX@bcbsil.com
+[root@paznslcimap26 ~]# mount -a
+[root@paznslcimap26 ~]# rpm -qa | grep katello-ca-consumer
+[root@paznslcimap26 ~]# rpm -e katello-ca-consumer-paznslsatc01.app.hcscint.net-1.0-1.noarch
+[root@paznslcimap26 ~]# rpm -qa | grep katello-ca-consumer
+[root@paznslcimap26 ~]# subscription-manager unregister
+subscription-manager clean
+yum clean all
+[root@paznslcimap26 ~]# yum install https://paznslsatc01.app.hcscint.net/pub/katello-ca-consumer-latest.noarch.rpm
+[root@paznslcimap26 ~]# rpm -qa | grep katello-ca-consumer
+[root@paznslcimap26 ~]# cat /etc/*release
+[root@paznslcimap26 ~]# subscription-manager register --org="Health_Care_Service_Corporation" --activationkey="ak-rhel7-cld-os-prod"
+subscription-manager refresh
+yum clean all
+rm -rf /var/cache/yum/*
+[root@paznslcimap26 ~]# yum update -y
+yum repolist
+# yum update --exclude=java* -y     -- for Hadoop server only 
+
+[root@paznslcimap26 ~]# mount -a
+[root@paznslcimap26 ~]# reboot
+uname -r
+
+ python3 -c "import xlrd; print(getattr(xlrd, next(item for item in dir(xlrd) if 'version' in item.lower())))"
+ python -c "import xlrd; print(getattr(xlrd, next(item for item in dir(xlrd) if 'version' in item.lower())))"
+
+df -hT /datalakedata/prod/group/consumption/xferout/wunderman/salesOPT
+  996  ls -ld /datalakedata/prod/group/consumption/xferout/wunderman/salesOPT
+  997  python3 -c "import xlrd; print(getattr(xlrd, next(item for item in dir(xlrd) if 'version' in item.lower())))"
+  998  python -c "import xlrd; print(getattr(xlrd, next(item for item in dir(xlrd) if 'version' in item.lower())))"
+
+taznslsatc01.app.test.hcscint.net
+
+yum install https://taznslsatc01.app.test.hcscint.net/pub/katello-ca-consumer-latest.noarch.rpm 
+
+yum install https://tazsslsatc01.app.test.hcscint.net/pub/katello-ca-consumer-latest.noarch.rpm
+
+yum install https://dwauslsatc01.app.dev.hcscint.net/pub/katello-ca-consumer-latest.noarch.rpm
+
+yum install https://twauslsatc01.app.test.hcscint.net/pub/katello-ca-consumer-latest.noarch.rpm
+
+yum install https://pwauslsatc01.app.hcscint.net/pub/katello-ca-consumer-latest.noarch.rpm
+
+yum install https://paznslsatc01.app.hcscint.net/pub/katello-ca-consumer-latest.noarch.rpm
+
+
+ak-rhel8-leg-os-dev
+twauslsatc01.app.test.hcscint.net
+
+subscription-manager register --org="Health_Care_Service_Corporation" --activationkey="ak-rhel8-cld-os-dev"
+
+subscription-manager register --org="Health_Care_Service_Corporation" --activationkey="ak-rhel7-leg-os-test"
+
+subscription-manager register --org="Health_Care_Service_Corporation" --activationkey="ak-rhel7-cld-os-dev"
+
+subscription-manager register --org="Health_Care_Service_Corporation" --activationkey="ak-rhel8-leg-os-prod"
+
+subscription-manager register --org="Health_Care_Service_Corporation" --activationkey="ak-rhel7-leg-os-prod"
+
+subscription-manager register --org="Health_Care_Service_Corporation" --activationkey="ak-rhel7-leg-hdp-prod"
+
+subscription-manager register --org="Health_Care_Service_Corporation" --activationkey="ak-rhel7-cld-os-prod"
+
+subscription-manager register --org="Health_Care_Service_Corporation" --activationkey="ak-rhel7-leg-os-dev"
+
+subscription-manager register --org="Health_Care_Service_Corporation" --activationkey="ak-rhel8-leg-os-dev"
+
+ak-rhel7-cld-os-prod
+
+ak-rhel7-cld-os-dev
+
+
+Only for hadoop patching 
+
+ak-rhel7-cld-hdp-altprod
+ak-rhel7-cld-hdp-dev
+ak-rhel7-cld-hdp-prod
+ak-rhel7-cld-hdp-test
+
+ak-rhel7-leg-hdp-altprod
+ak-rhel7-leg-hdp-dev
+ak-rhel7-leg-hdp-prod
+ak-rhel7-leg-hdp-test
+
+

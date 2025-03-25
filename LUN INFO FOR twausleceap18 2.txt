@@ -1,0 +1,80 @@
+[root@twausleceap18 ~]# lvmdiskscan
+  /dev/emcpowera [      20.00 TiB] LVM physical volume
+  /dev/sda3      [    <930.29 GiB] LVM physical volume
+  /dev/emcpowerb [      20.00 TiB]
+  1 disk
+  0 partitions
+  1 LVM physical volume whole disk
+  1 LVM physical volume
+[root@twausleceap18 ~]# for LUN in `powermt display dev=all | gr                ep "Pseudo name" | awk -F"=" '{print $NF}'`; do WWN=$(powermt di                splay dev=$LUN | grep WWN | awk -F"=" ' {print $NF}'); T_PTH=$(p                owermt display dev=$LUN | grep "active   alive" | wc -l); size=$                (lvmdiskscan | grep -w $LUN);echo "$LUN - $WWN : $T_PTH : $size"                ; done | tee /tm p/nks1
+tee: p/nks1: No such file or directory
+emcpowera - 60000970000197600743533030343835 : 8 :   /dev/emcpow                era [      20.00 TiB] LVM physical volume
+emcpowerb - 60000970000120203245533030323243 : 4 :   /dev/emcpow                erb [      20.00 TiB]
+emcpowerc - 60000970000120203252533030323331 [DONT_USE] : 0 :
+[root@twausleceap18 ~]# pvscan
+  PV /dev/sda3        VG rootvg          lvm2 [930.28 GiB / <844.38 GiB free]
+  PV /dev/emcpowera   VG appsvg          lvm2 [<20.00 TiB / 0    free]
+  Total: 2 [<20.91 TiB] / in use: 2 [<20.91 TiB] / in no VG: 0 [0   ]
+[root@twausleceap18 ~]# pvcreate /dev/emcpowerb
+  Physical volume "/dev/emcpowerb" successfully created.
+[root@twausleceap18 ~]# pvscan
+  PV /dev/sda3        VG rootvg          lvm2 [930.28 GiB / <844.38 GiB free]
+  PV /dev/emcpowera   VG appsvg          lvm2 [<20.00 TiB / 0    free]
+  PV /dev/emcpowerb                      lvm2 [20.00 TiB]
+  Total: 3 [<40.91 TiB] / in use: 2 [<20.91 TiB] / in no VG: 1 [20.00 TiB]
+[root@twausleceap18 ~]# vgs
+  VG     #PV #LV #SN Attr   VSize   VFree
+  appsvg   1   1   0 wz--n- <20.00t       0
+  rootvg   1  14   0 wz--n- 930.28g <844.38g
+[root@twausleceap18 ~]# vgextend appsvg /dev/emcpowerb
+  Volume group "appsvg" successfully extended
+[root@twausleceap18 ~]# vgs
+  VG     #PV #LV #SN Attr   VSize   VFree
+  appsvg   2   1   0 wz--n- <40.00t  <20.00t
+  rootvg   1  14   0 wz--n- 930.28g <844.38g
+[root@twausleceap18 ~]#
+
+[root@twausleceap18  ~]# lvconvert -m 1 --type mirror --corelog /dev/appsvg/datalv /dev/emcpowerb
+  Logical volume appsvg/datalv being converted.
+  appsvg/datalv: Converted: 0.01%
+  appsvg/datalv: Converted: 0.02%
+wait till it complete to the 100%
+
+[root@twausleceap18 ~]# lvs appsvg -o+devices
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%                    Sync Convert Devices
+  datalv appsvg mwi-aom--- <20.00t                                    100.                    00           datalv_mimage_0(0),datalv_mimage_1(0)
+
+[root@twausleceap18 ~]# pvscan
+  PV /dev/sda3        VG rootvg          lvm2 [930.28 GiB / <844.38 GiB free                  ]
+  PV /dev/emcpowera   VG appsvg          lvm2 [<20.00 TiB / 0    free]
+  PV /dev/emcpowerb   VG appsvg          lvm2 [<20.00 TiB / 0    free]
+  Total: 3 [<40.91 TiB] / in use: 3 [<40.91 TiB] / in no VG: 0 [0   ]
+[root@twausleceap18 ~]# lvconvert -m 0 /dev/appsvg/datalv /dev/emcpowera
+  Logical volume appsvg/datalv converted.
+[root@twausleceap18 ~]# pvscan
+  PV /dev/sda3        VG rootvg          lvm2 [930.28 GiB / <844.38 GiB free                  ]
+  PV /dev/emcpowera   VG appsvg          lvm2 [<20.00 TiB / <20.00 TiB free]
+  PV /dev/emcpowerb   VG appsvg          lvm2 [<20.00 TiB / 0    free]
+  Total: 3 [<40.91 TiB] / in use: 3 [<40.91 TiB] / in no VG: 0 [0   ]
+[root@twausleceap18 ~]# lvs appsvg -o+devices
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert Devices
+  datalv appsvg -wi-ao---- <20.00t                                                     /dev/emcpowerb(0)
+[root@twausleceap18 ~]# vgreduce appsvg /dev/emcpowera
+  Removed "/dev/emcpowera" from volume group "appsvg"
+[root@twausleceap18 ~]# pvscan
+  PV /dev/emcpowerb   VG appsvg          lvm2 [<20.00 TiB / 0    free]
+  PV /dev/sda3        VG rootvg          lvm2 [930.28 GiB / <844.38 GiB free]
+  PV /dev/emcpowera                      lvm2 [20.00 TiB]
+  Total: 3 [<40.91 TiB] / in use: 2 [<20.91 TiB] / in no VG: 1 [20.00 TiB]
+[root@twausleceap18 ~]# pvremove /dev/emcpowera
+  Labels on physical volume "/dev/emcpowera" successfully wiped.
+[root@twausleceap18 ~]# pvscan
+  PV /dev/emcpowerb   VG appsvg          lvm2 [<20.00 TiB / 0    free]
+  PV /dev/sda3        VG rootvg          lvm2 [930.28 GiB / <844.38 GiB free]
+  Total: 2 [<20.91 TiB] / in use: 2 [<20.91 TiB] / in no VG: 0 [0   ]
+[root@twausleceap18 ~]#
+
+[root@twauslodsdb0502 ~]# rescan-scsi-bus.sh
+
+after lun is created if lsblk | grep WWN(60000970000120203245533030423045) doesnt reflect the Lun then please rescan - rescan-scsi-bus.sh
+

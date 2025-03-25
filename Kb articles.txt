@@ -1,0 +1,55 @@
+KB0031185	HCSC_Opensystems_Engineering	Check File system usage and clean up of Root var tmp etc Root Owned file
+KB0031186	HCSC_Opensystems_Engineering	Commvault_Restart
+KB0031187	HCSC_Opensystems_Engineering	Control M restart
+KB0031188	HCSC_Opensystems_Engineering	File system mount/UnMount
+KB0031189	HCSC_Opensystems_Engineering	Firmware_UpgradeHP
+KB0031190	HCSC_Opensystems_Engineering	How to check CPU usage and CPU addition
+KB0031191	HCSC_Opensystems_Engineering	How to check Memory usage and memory addition
+KB0028573	HCSC_Opensystems_Engineering	UNIX_CPU_USAGE_LINUX
+KB0031457	HCSC_Opensystems_Engineering	UCD agent Issue / Restart 
+KB0031458	HCSC_Opensystems_Engineering	 Memory Related issues
+KB0031459	HCSC_Opensystems_Engineering	Server Reboot/Hung/Unavailability
+KB0031473	HCSC_Opensystems_Engineering	File permission related issues
+KB0031474	HCSC_Opensystems_Engineering	Centrify stop/start/restart/issues
+KB0031475	HCSC_Opensystems_Engineering	User Managemnet copy, winacp, move files
+KB0031476	HCSC_Opensystems_Engineering	User login issues
+KB0031477	HCSC_Opensystems_Engineering	sshd service stop/start/restart
+KB0031471	HCSC_Opensystems_Engineering	Zena stop/start/restart/issues
+KB0031478	HCSC_Opensystems_Engineering	Path failures for AIX
+KB0031479	HCSC_Opensystems_Engineering	Mksysb failures for AIX
+KB0031481	HCSC_Opensystems_Engineering	Hardware/Errpt Errors AIX
+KB0031457	HCSC_Opensystems_Engineering	UCD agent Issue / Restart 
+KB0031458	HCSC_Opensystems_Engineering	 Memory Related issues
+KB0031459	HCSC_Opensystems_Engineering	Server Reboot/Hung/Unavailability
+KB0031473	HCSC_Opensystems_Engineering	File permission related issues
+KB0031474	HCSC_Opensystems_Engineering	Centrify stop/start/restart/issues
+KB0031475	HCSC_Opensystems_Engineering	User Management copy, winacp, move files
+KB0031476	HCSC_Opensystems_Engineering	User login issues
+KB0031477	HCSC_Opensystems_Engineering	sshd service stop/start/restart
+KB0031471	HCSC_Opensystems_Engineering	Zena stop/start/restart/issues
+KB0031478	HCSC_Opensystems_Engineering	Path failures for AIX
+KB0031479	HCSC_Opensystems_Engineering	Mksysb failures for AIX
+KB0031481	HCSC_Opensystems_Engineering	Hardware/Errpt Errors AIX
+
+
+
+KB0031185	HCSC_Opensystems_Engineering	Check File system usage and clean up of Root var tmp etc Root Owned file	UNIX
+KB0031186	HCSC_Opensystems_Engineering	Commvault_Restart	UNIX
+KB0031187	HCSC_Opensystems_Engineering	Control M restart	UNIX
+KB0031188	HCSC_Opensystems_Engineering	File system mount/UnMount	UNIX
+KB0031189	HCSC_Opensystems_Engineering	Firmware_UpgradeHP	UNIX
+KB0031190	HCSC_Opensystems_Engineering	How to check CPU usage and CPU addition	UNIX
+KB0031191	HCSC_Opensystems_Engineering	How to check Memory usage and memory addition	UNIX
+KB0028573	HCSC_Opensystems_Engineering	UNIX_CPU_USAGE_LINUX	UNIX
+KB0031457	HCSC_Opensystems_Engineering	UCD agent Issue / Restart 	UNIX
+KB0031458	HCSC_Opensystems_Engineering	 Memory Related issues	UNIX
+KB0031459	HCSC_Opensystems_Engineering	Server Reboot/Hung/Unavailability	UNIX
+KB0031473	HCSC_Opensystems_Engineering	File permission related issues	UNIX
+KB0031474	HCSC_Opensystems_Engineering	Centrify stop/start/restart/issues	UNIX
+KB0031475	HCSC_Opensystems_Engineering	User Managemnet copy, winacp, move files	UNIX
+KB0031476	HCSC_Opensystems_Engineering	User login issues	UNIX
+KB0031477	HCSC_Opensystems_Engineering	sshd service stop/start/restart	UNIX
+KB0031471	HCSC_Opensystems_Engineering	Zena stop/start/restart/issues	UNIX
+KB0031478	HCSC_Opensystems_Engineering	Path failures for AIX	UNIX
+KB0031479	HCSC_Opensystems_Engineering	Mksysb failures for AIX	UNIX
+KB0031481	HCSC_Opensystems_Engineering	Hardware/Errpt Errors AIX	UNIX

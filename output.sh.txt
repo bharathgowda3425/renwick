@@ -1,0 +1,91 @@
+echo "==============Running uptime =========="
+uptime
+echo "==============Running w ==============="
+w
+echo "==============Running last | head ==============="
+last | head
+echo "==============Running df -g | wc -l ==============="
+df -Ph | wc -l
+echo "============== Running df -g ==============="
+df -Ph
+echo "============== Running LV display ==============="
+lvdisplay
+echo "============== Running VG display ==============="
+vgdisplay
+echo "============== Running PV display ==============="
+pvdisplay
+echo "===============Running LVS =============="
+lvs -a -o +devices
+echo "============== Running uname -a ==============="
+uname -a
+echo "============== Running uname -L ==============="
+uname -L
+echo " =============Running dmidecode ================"
+dmidecode --type 1
+echo "============== Running Fdisk =================="
+fdisk -l
+echo " =============Running multipath.conf ======="
+cat /etc/multipath.conf
+echo " ==============Running multipath -ll ========="
+multipath -ll
+echo "==============Running resolv.conf============"
+cat /etc/resolv.conf
+echo "==============Running sysctl.conf ============="
+cat /etc/sysctl.conf
+echo "============== RUNNING cat /etc/filesystems ==============="
+cat /etc/fstab
+echo "============== RUNNING cat ls -l /etc/init.d ==============="
+ls -l /etc/init.d
+echo "============== RUNNING cat /etc/passwd ==============="
+cat /etc/passwd
+echo "============== RUNNING cat /etc/security/limits.conf ==============="
+cat /etc/security/limits.conf
+echo "============== RUNNING cat /etc/hosts ==============="
+cat /etc/hosts
+echo "============== RUNNING ifconfig -a ==============="
+ifconfig -a
+echo "============== RUNNING netstat -nr ==============="
+netstat -nr
+echo "============== RUNNING lscpu ==============="
+lscpu
+echo " ======= Running rpm installed ================="
+rpm -qa
+echo "==============RUNNING ps -eaf | grep -i pmon ==============="
+ps -eaf | grep -i pmon
+echo "==============RUNNING ps -eaf | grep -i smon ==============="
+ps -eaf | grep -i smon
+echo "==============RUNNING ps -eaf | grep -i db2sysc ==============="
+ps -eaf | grep -i db2sysc
+echo "==============RUNNING ps -eaf | grep -i sybase ==============="
+ps -eaf | grep -i sybase
+echo "==============RUNNING ps -eaf | grep -i db2 ==============="
+ps -eaf | grep -i db2
+echo "==============RUNNING ps -eaf | grep -i nfs ==============="
+ps -eaf | grep -i nfs
+echo "==============RUNNING cat /opt/tivoli/tsm/client/ba/bin/dsm.sys ==============="
+cat /opt/tivoli/tsm/client/ba/bin/dsm.sys
+echo "==============RUNNING ls -l /usr/bin/dsm* ==============="
+ls -l /usr/bin/dsm*
+echo "==============RUNNING netstat -an ==============="
+netstat -an
+echo "==============RUNNING oslevel -s ==============="
+cat /etc/*release
+echo "==============RUNNING ulimit -a ==============="
+ulimit -a
+echo "==============RUNNING free -m ==============="
+free -m
+echo "==============RUNNING cat /etc/grub2.cfg ==============="
+cat /etc/grub2.cfg
+echo " ============= Network Interface ========================"
+grep -i suse /proc/version;if [ $? -eq "0" ] ;then
+        for interface in $(ip a | awk ' $(NF -2) == "UP" {print}' | awk -F ":" '{print $2 }');
+                do
+                echo "###################### Network Configuration file $interface ############################";
+                        cat /etc/sysconfig/network/ifcfg-$interface;
+                done;
+                else for interface in $(ip a | awk ' $(NF -2) == "UP" {print}' | awk -F ":" '{print $2 }');
+                        do
+                        echo "###################### Network Configuration file $interface ############################";
+                                cat /etc/sysconfig/network-scripts/ifcfg-$interface;
+                        done;
+        fi;

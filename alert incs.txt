@@ -1,0 +1,1100 @@
+[10:55 PM] Sai Durga Ravindra
+##############ILO#####################
+
+pwausldnapp55-ilo.oob.hcscint.net --------production servers
+ 
+twauslapora003-ilo.oob.test.hcscint.net ---------test servers
+ 
+ipmitool lan print |grep -i "ip address" ------ it will show ip address
+[10:55 PM] Sai Durga Ravindra
+HP CONSOLE--
+ 
+Username : Admin
+ 
+Password : B4YOUGO2
+
+
+
+RE: INC4264467- Centrify agent on server is down  on db2 server dchisxprcdb01
+Its started.
+
+dchisxprcdb01:/ ~]# adinfo
+Local host name:   dchisxprcdb01
+Joined to domain:  adhcscdev.net
+Joined as:         dchisxprcdb01.app.test.hcscint.net
+Pre-win2K name:    dchisxprcdb01
+Current DC:        dchiswifdc02.adhcscdev.net
+Preferred site:    CHI-Dev
+Zone:              adhcscdev.net/HCSC/Centrify/Zones/DEV
+Last password set: 2024-06-27 16:19:06 CDT
+CentrifyDC mode:   connected
+Licensed Features: Enabled
+dchisxprcdb01:/ ~]#
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4264905
+
+1.Situation:2303688 - Hostname:pwauslwas73 - Minor-P5: AYS:MSP_Unix - Filespace /tmp below 10% AYS on Host pwauslwas73.app.hcscint.net - Minor-P5: AYS:MSP_Unix - Filespace /tmp below 10% AYS - OPEN Problem P-240711682 in environment Production
+Problem detected at: 20:26 (UTC) 17.07.2024
+
+[root@pwauslwas73 tmp]# vgs
+  VG     #PV #LV #SN Attr   VSize   VFree
+  appsvg   1   9   0 wz--n- <65.00g <1.01g
+  rootvg   1  13   0 wz--n-  98.80g  7.30g
+[root@pwauslwas73 tmp]# df -h /tmp
+Filesystem                Size  Used Avail Use% Mounted on
+/dev/mapper/rootvg-tmplv  6.8G  5.9G  595M  91% /tmp
+[root@pwauslwas73 tmp]# lvextend -L +1G /dev/mapper/rootvg-tmplv -r
+  Size of logical volume rootvg/tmplv changed from 7.00 GiB (1792 extents) to 8.00 GiB (2048 extents).
+  Logical volume rootvg/tmplv successfully resized.
+resize2fs 1.42.9 (28-Dec-2013)
+Filesystem at /dev/mapper/rootvg-tmplv is mounted on /tmp; on-line resizing required
+old_desc_blocks = 1, new_desc_blocks = 1
+The filesystem on /dev/mapper/rootvg-tmplv is now 2097152 blocks long.
+
+[root@pwauslwas73 tmp]# df -h /tmp
+Filesystem                Size  Used Avail Use% Mounted on
+/dev/mapper/rootvg-tmplv  7.8G  5.9G  1.6G  80% /tmp
+[root@pwauslwas73 tmp]#
+-----------------------------------------------------------------------------------------------------------------------------------
+8/6/24
+Linux Load Too High on Host pwauslidsdb01.app.hcscint.net - Warning-P5: AYS:MSP_Unix - Linux Load Too High - OPEN Problem P-24084092 in environment Production
+
+INC4319874 - needs to be routed?
+ 
+[root@pwauslidsdb01 ~]# sar -u 2 3
+Linux 3.10.0-1160.119.1.el7.x86_64 (pwauslidsdb01)      08/05/2024      _x86_64_        (22 CPU)
+ 
+10:17:40 PM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:17:42 PM     all     21.86      0.05      5.07      0.02      0.00     73.00
+10:17:44 PM     all     23.02      0.07      5.66      2.98      0.00     68.26
+10:17:46 PM     all     18.13      0.05      4.75      0.83      0.00     76.25
+Average:        all     21.01      0.05      5.16      1.27      0.00     72.51
+---------------------------------------------------------------------------------------------------------------------------------------
+
+INC4319548:pwausldikapp05 - Memory saturation on Host pwausldikapp05.app.hcscint.net - Memory saturation - OPEN Problem P-24083875 in environment Production
+
+[root@pwausldikapp05 ~]# free -mh
+              total        used        free      shared  buff/cache   available
+Mem:           251G        113G        127G        158M         10G        137G
+Swap:           15G         12G        3.9G
+
+[root@pwausldikapp05 ~]# top -o %MEM
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+30760 u532046   20   0  107.2g  95.4g  29904 S   0.0 37.9   8:53.47 python
+ 4513 dssuser   20   0   40.4g   4.8g   7424 S   0.0  1.9 991:57.25 java
+-------------------------------------------------------------------------------------------------------------------------------------------------
+INC4319286 - Linux Load Too High on Host pwausldsapp03.app.hcscint.net - Warning-P5: AYS:MSP_Unix - Linux Load Too High
+
+[root@pwausldsapp03 ~]# sar -u 2 3
+Linux 3.10.0-1160.119.1.el7.x86_64 (pwausldsapp03)      08/05/2024      _x86_64_        (16 CPU)
+
+10:50:50 PM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:50:52 PM     all     12.36      0.00     36.53      0.09      0.00     51.02
+10:50:54 PM     all     19.02      0.00     54.37      0.82      0.00     25.80
+10:50:56 PM     all     18.96      0.00     55.19      0.75      0.00     25.09
+Average:        all     16.77      0.00     48.67      0.56      0.00     34.00
+----------------------------------------------------------------------------------------------------------------------------------------------------
+INC4319933 - CPU saturation
+[root@pwauslidsdb02 ~]# sar -u 2 3
+Linux 3.10.0-1160.119.1.el7.x86_64 (pwauslidsdb02)      08/06/2024      _x86_64_                                                                             (18 CPU)
+
+12:04:00 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+12:04:02 AM     all      4.14      0.08      4.98      5.43      0.00     85.37
+12:04:04 AM     all      4.75      0.00      6.43      4.30      0.00     84.52
+12:04:06 AM     all      4.28      0.03      5.29      4.81      0.00     85.59
+Average:        all      4.39      0.04      5.56      4.85      0.00     85.16
+
+[root@pwauslidsdb02 ~]# top -o %CPU
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 4310 root      20   0 1145680  82680  23348 S  87.5  0.0  18053:34 guard_stap
+ 5108 idsprdi2  20   0  311.9g 267.1g 255.2g S  37.5 55.4  96583:21 db2sysc
+--------------------------------------------------------------------------------------------------------------------------------------------------
+INC4323216 - routed - Memory saturation on Host pwauslmnapp01.app.hcscint.net - Memory saturation - OPEN Problem P-24084840 in environment Production
+
+[root@pwauslmnapp01 ~]# free -mh
+              total        used        free      shared  buff/cache   available
+Mem:           251G        216G        737M        2.8G         34G         31G
+Swap:          4.0G        4.0G         16M
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+31059 hdfs      20   0  200.1g 195.8g  38112 S 431.2 77.8 505:05.86 java
+19205 root      20   0   22.0g   5.6g  15948 S 231.2  2.2  91293:52 java
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4322906 - twauslidsdb01 - 4hr Extended CPU Saturation Linux - OPEN Custom Alert P-240810952 in environment NonProduction
+
+[root@twauslidsdb01 ~]# sar -u 2 3
+Linux 3.10.0-1160.119.1.el7.x86_64 (twauslidsdb01)      08/07/2024      _x86_64_        (6 CPU)
+
+03:51:58 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+03:52:00 AM     all      4.77      0.00      2.51      0.08      0.00     92.64
+03:52:02 AM     all      9.72      0.00      2.60      0.08      0.00     87.59
+03:52:04 AM     all      3.93      0.00      2.01      0.00      0.00     94.06
+Average:        all      6.14      0.00      2.37      0.06      0.00     91.43
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4322892- twauslapp115 - Memory saturation - OPEN Problem P-240811217 in environment NonProduction
+Problem detected at: 02:51 (UTC) 07.08.2024
+
+[root@twauslapp115 ~]# free -mh
+              total        used        free      shared  buff/cache   available
+Mem:           15Gi        13Gi       189Mi       887Mi       1.6Gi       637Mi
+Swap:            0B          0B          0B
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+3604678 root      20   0 6191336 949900   3248 S   0.0   5.9  22:45.65 rsyslogd
+2721197 root      20   0 4815644 341508 116856 S   0.0   2.1 340:22.59 cvd
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Hi @MSP_IMS_UNIX,
+
+Could you please share the WWN number of the effected disk so that we can verify storage end
+
+RE: #INC4320237 - Disk issue on twauslorbora20/21/22/23
+
+[root@twauslorbora20 ~]# udevadm info --query=all --name=/dev/sda | grep -i wwn_with
+E: ID_WWN_WITH_EXTENSION=0x600062b214fba6c02cd293248227147c
+ 
+[root@twauslorbora21 ~]# udevadm info --query=all --name=/dev/sda | grep -i wwn_with
+E: ID_WWN_WITH_EXTENSION=0x600062b214fba2402cd29838c03ac02c
+[root@twauslorbora21 ~]#
+ 
+[root@twauslorbora22 ~]# udevadm info --query=all --name=/dev/sda | grep -i wwn_with
+E: ID_WWN_WITH_EXTENSION=0x600062b214fba1802cce7fe15d6ba88e
+[root@twauslorbora22 ~]#
+ 
+[root@twauslorbora23 ~]# udevadm info --query=all --name=/dev/sda | grep -i wwn_with
+E: ID_WWN_WITH_EXTENSION=0x600062b214fb84802cd2af53c562d63b
+[root@twauslorbora23 ~]#
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INC4328655
+
+Stop Control-M agent service on server dwausldsapp01.app.dev.hcscint.net
+
+Kill any existing SFTP Processes
+
+Restart SSHD service
+---------steps
+Start Control-M agent service on server dwausldsapp01.app.dev.hcscint.net
+/opt/ctm/ctm/scripts/shut-ag -u svczena -p all
+ps -ef | grep sftp
+systemctl restart sshd
+ps -eo ppid,pid,cmd | grep sftp- to check how many process running
+kill pids
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8/14/2024
+
+INC4341553 - resolved
+
+Filespace /var below 10% AYS on Host awauslmuap07.app.alt.hcscint.net - Minor-P5: AYS:MSP_Unix - Filespace /var below 10% AYS - OPEN Problem P-24089870 in environment Production
+Problem detected at: 05:40 (UTC) 14.08.2024
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Regards,
+Renwick Blaize A
+Infrastructure Delivery-UNIX || Accenture-India.
+Email- msp_ims_unix@bcbsil.com
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INC4340059 - awaiting user response 
+
+Run script on Test server using 'svczena'
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+8/17/24
+INC4348832
+
+Host
+pwausxtsmmgt03.app.hcscint.net
+
+Minor-P5: AYS:MSP_Unix - Filespace /var below 10% AYS
+The Disk available % value of 0 % was below your custom threshold of 10 %.
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+ps -ef|grep ctm
+df -Th
+cd /opt/ctm/ctm/scripts
+ll
+./start-ag
+./shut-ag
+./start-ag
+date
+ps -ef|grep ctm
+
+command to check ctm running
+
+su - svczena
+ 
+ag_diag_comm
+ 
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8/20/2024
+
+INC4355575 - ctm restart
+
+
+[root@twauslorbapp29 scripts]#
+Starting the agent as 'root' user
+
+Control-M/Agent Listener started. pid: 1786400
+Control-M/Agent Tracker started. pid: 1786539
+
+Control-M/Agent started successfully.
+[root@twauslorbapp29 scripts]#
+
+
+[root@twauslorbapp30 scripts]#
+Starting the agent as 'root' user
+
+Control-M/Agent Listener started. pid: 1649135
+Control-M/Agent Tracker started. pid: 1649275
+
+Control-M/Agent started successfully.
+[root@twauslorbapp30 scripts]#
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INC4356326 - ctm restart
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INC4353052 - routed to network team
+kindly check the network utilisation from your end and close the INC
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4356169 - ssh port issue
+
+pwaussecrapp01 # uptime
+  9:49pm  up 14 day(s), 11:15,  1 user,  load average: 0.05, 0.05, 0.05
+pwaussecrapp01 # date
+Monday, August 19, 2024 09:50:01 PM CDT
+pwaussecrapp01 #
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INC4355993 - Need to reboot servers
+
+on hold
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4357792 - host availability unhealthy - resolved
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4357817 - pwausxtsmmgt03 - Multiple infrastructure problems - resolved
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4357820 - Cpu saturation - resolved
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4355993 - reboot successfully completed.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+8/21/24
+
+INC4361344 - resolved
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INC4361371 - resolved
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INC4361359 - resolved
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INC4361343 - resolved
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INC4359153 - control m restart - resolved
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INC4361340 - resolved
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+CTASK1390302
+
+Hi Team, 
+
+Due to the rpcinfo: can't contact portmapper: RPC: Remote system error - Connection timed out error we couldn't complete this CTASK. 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8/22/24
+
+CHG0722411 - CTASK1388994 - needfull done - closed
+CHG0722411 - CTASK1388991 - needfull done - closed
+CHG0722411 - 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8/27/21
+
+INC4373753 - load high - underthreshold - resolved
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+8/28/24
+
+INC4377281 - resolved
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4379584 - resolved
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CTASK1380299 - closed
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+https://pwauvavmvc01.adhcscint.net     ---production servers link
+adhcscint\U548011
+ 
+https://twauvavmvc01.adhcsctst.net
+adhcsctst\U548011
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Routed to - HCSC_TVM_Tanium - INC4411829 - dwauslvdsap04.app.dev.hcscint.net: Low disk space -OPEN Problem P-24098901  in environment NonProduction Problem detected at: 10:30 (UTC) 07.09.2024
+
+Root Cause
+Disk available %
+The total available space on disk /opt/Tanium is lower than 3 %
+
+Please look into this
+
+[root@dwauslvdsap04 ~]# df -hT /opt/Tanium
+Filesystem Type Size Used Avail Use% Mounted on
+/dev/mapper/rootvg-taniumlv ext4 4.8G 4.8G 0 100% /opt/Tanium
+[root@dwauslvdsap04 ~]# vgs
+VG #PV #LV #SN Attr VSize VFree
+appsvg 1 1 0 wz--n- <350.00g 0
+rootvg 1 13 0 wz--n- 98.80g 8.00m
+[root@dwauslvdsap04 ~]# cd /opt/Tanium
+[root@dwauslvdsap04 Tanium]# du -sh * | sort -nr
+16K lost+found
+4.4G TaniumClient
+[root@dwauslvdsap04 Tanium]#
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+ashish_verma@bcbsil.com
+Music@2020
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4419729 - resolved
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4426029 - Major alert [Alert0082779]  . Created on Node: [pacesdxdb01.hcscint.net]   
+Minor - AIX Hardware Error Reported - Hostname:pacesdxdb01.hcscint.net - Dynatrace NonProduction:
+
+OPEN Problem P-240915937 in environment NonProduction
+Problem detected at: 03:46 (UTC) 12.09.2024
+
+1 impacted infrastructure component
+
+Host
+pacesdxdb01.hcscint.net
+
+pacesdxdb01:/ ~]# lspv
+hdisk0          00f964faf3344e15                    rootvg          active
+hdisk1          00f964faf3951ec3                    db2vg           active
+hdisk2          00f964faf3951f42                    db2vg           active
+hdisk3          00f964faf3951fc0                    db2vg           active
+hdisk4          00f964faf395203f                    db2vg           active
+hdisk5          00f964faf39520be                    db2vg           active
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+INC4437917 - Agent is running in Non Root Mode - twauslprcapp06
+
+[root@twauslprcapp06 ~]# /opt/ctm/ctm/scripts/set_agent_mode
+
+ Enter Control-M/Agent UNIX username [root]: svczena
+su: user svczena does not exist
+*** CONTROLM environment variable is not defined for user svczena. ***
+
+[root@twauslprcapp06 ~]# ls -ld /opt/ctm/ctm/scripts/set_agent_mode
+-rwxr-xr-x 1 ansible ansible 28402 Dec 25  2019 /opt/ctm/ctm/scripts/set_agent_mode
+[root@twauslprcapp06 ~]# /opt/ctm/ctm/scripts/set_agent_mode -u ansible
+
+ Current Mode: none.
+
+ Choose the action you want to perform:
+ 1. Enable non-root mode
+ 2. Enable root mode
+ 3. Enable sudo mode
+ 4. Prepare for non root uninstall
+ q. Quit
+
+ Choose option: 2
+ Sudo mode is disabled
+
+/opt/ctm/ctm/exe/vault/su_bmc ownership set to ansible
+/opt/ctm/ctm/exe/vault/su_bmc setuid bit was reset
+/opt/ctm/ctm/sysout permissions set to 755 without sticky bit
+/opt/ctm/ctm/sysout setgid bit was reset
+/opt/ctm/ctm/non-root deleted
+
+ Non-root mode was disabled.
+
+ The agent is currently running as 'ansible'.
+ Restart is needed to complete enabling root mode, Do you want to restart it as root ? [Y/N] Y
+Killing Control-M/Agent Listener pid:397001
+Killing Control-M/Agent Tracker pid:397057
+
+
+Starting the agent as 'root' user
+
+Control-M/Agent Listener started. pid: 833654
+Control-M/Agent Tracker started. pid: 833716
+
+Control-M/Agent started successfully.
+[root@twauslprcapp06 ~]#
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Alert0092774
+  999  df -hi
+ 1000  df -i
+ 1001  vgs
+ 1002  lvs
+ 1003  lvextend -L +10G /dev/mapper/rootvg-zenalv -r
+ 1004  df -hT /opt/zena
+ 1005  df -i /opt/zena
+ 1006  df -i
+ 1007  lvextend -L +10G /dev/mapper/rootvg-zenalv -r
+ 1008  df -i /opt/zena
+ 1009  df -i
+ 1010  lsof
+ 1011  history
+You have mail in /var/spool/mail/root
+[root@twauslaenapp10 ~]#
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Hi Team,
+
+Backup failing for server paznsl52k4ap01  with connectivity error..
+
+Please restart Commvault services using below commands and check its has enough free space in temp and opt/dataprotection path .
+
+Starting services>            commvault -all start         Use this command to start all services.
+Stopping services>          commvault -all stop          Use this command to stop all services.
+Restarting services>       commvault -all restart     Use this command to restart all services.
+
+Assigned INC4523563 for the same.
+
+https://wdf17482.live.dynatrace.com/#dashboard;gtf=-24h%20to%20now;gf=all;id=9b035bce-b38d-498c-be6e-7feee5cf8051
+ 
+https://fjh52344.live.dynatrace.com/#dashboard;id=faf8aad1-fd20-47df-b1bc-a8c5bbe90c4a;gf=all;gtf=-2h
+
+su - svczena
+ 
+ag_diag_comm
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+[root@pwausldnapp87 ~]# ipmitool lan print
+Set in Progress         : Set Complete
+Auth Type Support       :
+Auth Type Enable        : Callback :
+                        : User     :
+                        : Operator :
+                        : Admin    :
+                        : OEM      :
+IP Address Source       : Static Address
+IP Address              : 10.137.192.17
+Subnet Mask             : 255.255.252.0
+MAC Address             : 98:f2:b3:3c:6a:00
+SNMP Community String   :
+BMC ARP Control         : ARP Responses Enabled, Gratuitous ARP Disabled
+Default Gateway IP      : 10.137.192.1
+802.1q VLAN ID          : Disabled
+802.1q VLAN Priority    : 0
+RMCP+ Cipher Suites     : 0,1,2,3
+Cipher Suite Priv Max   : XuuaXXXXXXXXXXX
+                        :     X=Cipher Suite Unused
+                        :     c=CALLBACK
+                        :     u=USER
+                        :     o=OPERATOR
+                        :     a=ADMIN
+                        :     O=OEM
+Bad Password Threshold  : Not Available
+[root@pwausldnapp87 ~]# ^C
+[root@pwausldnapp87 ~]# mount /hadoop05
+mount: can't find UUID=4a9cbe3a-99ca-48ee-94ec-2627a635e802
+[root@pwausldnapp87 ~]#
+
+logical drive creation commands
+
+HDD Replacement
+ 
+parted /dev/sdf
+mklabel gpt
+mkpart primary xfs 1049kB 100%
+mkfs.xfs /dev/sdf1
+blkid
+
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head
+
+
+
+https://servicenow.fyiblue.com/now/sow/home
+
+twauslodsdb07-ilo.oob.hcscint.net
+admin        B4YOUGO2
+
+[root@twauslodsdb0502 ~]# rescan-scsi-bus.sh
+
+after lun is created if lsblk | grep WWN(60000970000120203245533030423045) doesnt reflect the Lun then please rescan - rescan-scsi-bus.sh
+
+cd /sys/class/scsi_host;for i in `ls`; do echo "- - -" > $i/scan; done;powermt config;powermt check;powermt save
+
+INC4701172
+
+https://support.hpe.com/hpesc/public/docDisplay?docId=sd00003196en_us
+
+ashish_verma@bcbsil.com
+Music@2020
+
+pwausldnapp87-ilo.oob.hcscint.net
+
+for centrify==
+
+rpm -qa| grep -i centrify
+adinfo
+
+
+
+CTASK1489779 - Implementation task for Unix:  to create virtual swap on each server
+
+pwauslwsapp062.app.hcscint.net
+pwauslwsapp063.app.hcscint.net
+pwauslwsapp064.app.hcscint.net
+
+
+[root@pwauslwsapp064 ~]# lsblk
+NAME                        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+fd0                           2:0    1    4K  0 disk
+sda                           8:0    0  100G  0 disk
+├─sda1                        8:1    0  200M  0 part /boot/efi
+├─sda2                        8:2    0    1G  0 part /boot
+└─sda3                        8:3    0 98.8G  0 part
+  ├─rootvg-rootlv           253:0    0    4G  0 lvm  /
+  ├─rootvg-usrlv            253:1    0    6G  0 lvm  /usr
+  ├─rootvg-varlv            253:3    0   10G  0 lvm  /var
+  ├─rootvg-optlv            253:4    0    4G  0 lvm  /opt
+  ├─rootvg-tmplv            253:5    0    4G  0 lvm  /tmp
+  ├─rootvg-homelv           253:6    0    1G  0 lvm  /home
+  ├─rootvg-vartmpstagelv    253:7    0   10G  0 lvm  /var/tmp/stage
+  ├─rootvg-varcorelv        253:8    0    5G  0 lvm  /var/core
+  ├─rootvg-usrlocallv       253:9    0   10G  0 lvm  /usr/local
+  ├─rootvg-dynatracelv      253:10   0    5G  0 lvm  /opt/dynatrace
+  ├─rootvg-opttrapslv       253:11   0   10G  0 lvm  /opt/traps
+  ├─rootvg-zenalv           253:12   0  512M  0 lvm  /opt/zena
+  ├─rootvg-dataprotectionlv 253:13   0    8G  0 lvm  /opt/dataprotection
+  ├─rootvg-ctmlv            253:14   0    5G  0 lvm  /opt/ctm
+  └─rootvg-taniumlv         253:15   0   10G  0 lvm  /opt/Tanium
+sdb                           8:16   0   10G  0 disk
+└─datavg-Infogix_Assurelv   253:2    0   10G  0 lvm  /Infogix_Assure
+sdc                           8:32   0   10G  0 disk
+sr0                          11:0    1 1024M  0 rom
+[root@pwauslwsapp064 ~]# free -m
+              total        used        free      shared  buff/cache   available
+Mem:          16045       14237         157         895        1649         613
+Swap:             0           0           0
+[root@pwauslwsapp064 ~]# fdisk /dev/sdc
+Welcome to fdisk (util-linux 2.23.2).
+
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table
+Building a new DOS disklabel with disk identifier 0x558ac720.
+
+Command (m for help): m
+Command action
+   a   toggle a bootable flag
+   b   edit bsd disklabel
+   c   toggle the dos compatibility flag
+   d   delete a partition
+   g   create a new empty GPT partition table
+   G   create an IRIX (SGI) partition table
+   l   list known partition types
+   m   print this menu
+   n   add a new partition
+   o   create a new empty DOS partition table
+   p   print the partition table
+   q   quit without saving changes
+   s   create a new empty Sun disklabel
+   t   change a partition's system id
+   u   change display/entry units
+   v   verify the partition table
+   w   write table to disk and exit
+   x   extra functionality (experts only)
+
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p):
+Using default response p
+Partition number (1-4, default 1):
+First sector (2048-20971519, default 2048):
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-20971519, default 20971519):
+Using default value 20971519
+Partition 1 of type Linux and of size 10 GiB is set
+
+Command (m for help): t
+Selected partition 1
+Hex code (type L to list all codes): L
+
+ 0  Empty           24  NEC DOS         81  Minix / old Lin bf  Solaris
+ 1  FAT12           27  Hidden NTFS Win 82  Linux swap / So c1  DRDOS/sec (FAT-
+ 2  XENIX root      39  Plan 9          83  Linux           c4  DRDOS/sec (FAT-
+ 3  XENIX usr       3c  PartitionMagic  84  OS/2 hidden C:  c6  DRDOS/sec (FAT-
+ 4  FAT16 <32M      40  Venix 80286     85  Linux extended  c7  Syrinx
+ 5  Extended        41  PPC PReP Boot   86  NTFS volume set da  Non-FS data
+ 6  FAT16           42  SFS             87  NTFS volume set db  CP/M / CTOS / .
+ 7  HPFS/NTFS/exFAT 4d  QNX4.x          88  Linux plaintext de  Dell Utility
+ 8  AIX             4e  QNX4.x 2nd part 8e  Linux LVM       df  BootIt
+ 9  AIX bootable    4f  QNX4.x 3rd part 93  Amoeba          e1  DOS access
+ a  OS/2 Boot Manag 50  OnTrack DM      94  Amoeba BBT      e3  DOS R/O
+ b  W95 FAT32       51  OnTrack DM6 Aux 9f  BSD/OS          e4  SpeedStor
+ c  W95 FAT32 (LBA) 52  CP/M            a0  IBM Thinkpad hi eb  BeOS fs
+ e  W95 FAT16 (LBA) 53  OnTrack DM6 Aux a5  FreeBSD         ee  GPT
+ f  W95 Ext'd (LBA) 54  OnTrackDM6      a6  OpenBSD         ef  EFI (FAT-12/16/
+10  OPUS            55  EZ-Drive        a7  NeXTSTEP        f0  Linux/PA-RISC b
+11  Hidden FAT12    56  Golden Bow      a8  Darwin UFS      f1  SpeedStor
+12  Compaq diagnost 5c  Priam Edisk     a9  NetBSD          f4  SpeedStor
+14  Hidden FAT16 <3 61  SpeedStor       ab  Darwin boot     f2  DOS secondary
+16  Hidden FAT16    63  GNU HURD or Sys af  HFS / HFS+      fb  VMware VMFS
+17  Hidden HPFS/NTF 64  Novell Netware  b7  BSDI fs         fc  VMware VMKCORE
+18  AST SmartSleep  65  Novell Netware  b8  BSDI swap       fd  Linux raid auto
+1b  Hidden W95 FAT3 70  DiskSecure Mult bb  Boot Wizard hid fe  LANstep
+1c  Hidden W95 FAT3 75  PC/IX           be  Solaris boot    ff  BBT
+1e  Hidden W95 FAT1 80  Old Minix
+Hex code (type L to list all codes): 82
+Changed type of partition 'Linux' to 'Linux swap / Solaris'
+
+Command (m for help): p
+
+Disk /dev/sdc: 10.7 GB, 10737418240 bytes, 20971520 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x558ac720
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdc1            2048    20971519    10484736   82  Linux swap / Solaris
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+[root@pwauslwsapp064 ~]# lsblk
+NAME                        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+fd0                           2:0    1    4K  0 disk
+sda                           8:0    0  100G  0 disk
+├─sda1                        8:1    0  200M  0 part /boot/efi
+├─sda2                        8:2    0    1G  0 part /boot
+└─sda3                        8:3    0 98.8G  0 part
+  ├─rootvg-rootlv           253:0    0    4G  0 lvm  /
+  ├─rootvg-usrlv            253:1    0    6G  0 lvm  /usr
+  ├─rootvg-varlv            253:3    0   10G  0 lvm  /var
+  ├─rootvg-optlv            253:4    0    4G  0 lvm  /opt
+  ├─rootvg-tmplv            253:5    0    4G  0 lvm  /tmp
+  ├─rootvg-homelv           253:6    0    1G  0 lvm  /home
+  ├─rootvg-vartmpstagelv    253:7    0   10G  0 lvm  /var/tmp/stage
+  ├─rootvg-varcorelv        253:8    0    5G  0 lvm  /var/core
+  ├─rootvg-usrlocallv       253:9    0   10G  0 lvm  /usr/local
+  ├─rootvg-dynatracelv      253:10   0    5G  0 lvm  /opt/dynatrace
+  ├─rootvg-opttrapslv       253:11   0   10G  0 lvm  /opt/traps
+  ├─rootvg-zenalv           253:12   0  512M  0 lvm  /opt/zena
+  ├─rootvg-dataprotectionlv 253:13   0    8G  0 lvm  /opt/dataprotection
+  ├─rootvg-ctmlv            253:14   0    5G  0 lvm  /opt/ctm
+  └─rootvg-taniumlv         253:15   0   10G  0 lvm  /opt/Tanium
+sdb                           8:16   0   10G  0 disk
+└─datavg-Infogix_Assurelv   253:2    0   10G  0 lvm  /Infogix_Assure
+sdc                           8:32   0   10G  0 disk
+└─sdc1                        8:33   0   10G  0 part
+sr0                          11:0    1 1024M  0 rom
+[root@pwauslwsapp064 ~]# partprobe
+[root@pwauslwsapp064 ~]# mkswap /dev/sdc1
+Setting up swapspace version 1, size = 10484732 KiB
+no label, UUID=96868ce8-82d8-4706-91a9-181f4c740b03
+[root@pwauslwsapp064 ~]# swapon /dev/sdc1
+[root@pwauslwsapp064 ~]# swapon --show
+NAME      TYPE      SIZE USED PRIO
+/dev/sdc1 partition  10G   0B   -2
+[root@pwauslwsapp064 ~]# free -hm
+              total        used        free      shared  buff/cache   available
+Mem:            15G         13G        161M        895M        1.6G        602M
+Swap:            9G          0B          9G
+[root@pwauslwsapp064 ~]# echo "/dev/sdc1 swap swap defaults 0 0" >> /etc/fstab
+[root@pwauslwsapp064 ~]# cat /etc/fstab
+
+#
+# /etc/fstab
+# Created by anaconda on Wed May 15 14:03:42 2019
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/rootvg-rootlv /                       ext4    defaults        1 1
+UUID=baa3e5b6-772d-49fa-82e3-1be3c958b8c4 /boot                   ext4    defaults        1 2
+UUID=2876-B874                            /boot/efi               vfat    umask=0077,shortname=winnt 0 0
+#
+/dev/mapper/rootvg-homelv        /home              ext4    defaults        1 2
+/dev/mapper/rootvg-optlv         /opt               ext4    defaults        1 2
+/dev/mapper/rootvg-tmplv         /tmp               ext4    defaults        1 2
+/dev/mapper/rootvg-usrlv         /usr               ext4    defaults        1 2
+/dev/mapper/rootvg-usrlocallv    /usr/local         ext4    defaults        1 2
+/dev/mapper/rootvg-varlv         /var               ext4    defaults        1 2
+/dev/mapper/rootvg-varcorelv     /var/core          ext4    defaults        1 2
+/dev/mapper/rootvg-vartmpstagelv /var/tmp/stage     ext4    defaults        1 2
+/dev/rootvg/dynatracelv /opt/dynatrace ext4 defaults 1 2
+/dev/rootvg/opttrapslv /opt/traps ext4 defaults 1 2
+/dev/rootvg/zenalv /opt/zena ext4 defaults 1 2
+/dev/rootvg/dataprotectionlv /opt/dataprotection                   ext4    defaults        1 2
+/dev/datavg/Infogix_Assurelv  /Infogix_Assure  ext4 defaults 1 2
+/dev/rootvg/ctmlv /opt/ctm ext4 defaults 1 2
+nfs.waunas23.hcscint.net:/ifs/pwauesnas23/prod/nfs/passure4   /Infogix_Assure_Common    nfs    rw,sync,hard,_netdev  0 0
+nfs.waunas23.hcscint.net:/ifs/pwauesnas23/prod/nfs/passure   /EGateway    nfs    rw,sync,hard,_netdev  0 0
+nfs.waunas23.hcscint.net:/ifs/pwauesnas23/prod/nfs/pfacets /FACETS nfs4 rw,bg,hard,intr,noatime,nodiratime,rsize=1048576,wsize=1048576,_netdev 0 0
+nfs.waunas23.hcscint.net:/ifs/pwauesnas23/prod/passuresftp /AssureSFTP nfs4 rw,bg,hard,intr,noatime,nodiratime,rsize=1048576,wsize=1048576,_netdev 0 0
+/dev/rootvg/taniumlv /opt/Tanium                   ext4    defaults        1 2
+/dev/sdc1 swap swap defaults 0 0
+[root@pwauslwsapp064 ~]# mount -a
+[root@pwauslwsapp064 ~]#
+
+
+steps for XDR installation
+
+cd /tmp
+ll
+mkdir /home/XDR
+cp 'XDR_Linux_8_6_0_Installer_rpm.tar 1.gz' /home/XDR
+cp 'XDR_Linux_8_6_0_Installer_sh.tar 1.gz' /home/XDR
+cd /home/XDR
+ll
+tar -xvf 'XDR_Linux_8_6_0_Installer_rpm.tar 1.gz'
+ll
+tar -xvf 'XDR_Linux_8_6_0_Installer_sh.tar 1.gz'
+ll
+rpm -qa |grep -i cortex
+rpm --rebuilddb
+rpm -qa |grep -i cortex
+rpm -e cortex-agent-8.5.0.125392-1.x86_64
+mkdir -p /etc/panw
+cp ./cortex.conf /etc/panw/
+ls -l
+rpm -i cortex-8.6.0.127790.rpm
+rpm -qa |grep -i cortex
+systemctl status traps_pm
+systemctl status traps_pmd.service
+systemctl status traps
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+logical drive rebuild
+
+1.login into ilo
+2.go to overview and do cold boot
+3. then press fn f10
+4. select second option
+
+[root@pwausldnapp182 ~]# mount -a
+[root@pwausldnapp182 ~]# df -h
+Filesystem                           Size  Used Avail Use% Mounted on
+devtmpfs                             189G     0  189G   0% /dev
+tmpfs                                189G   28K  189G   1% /dev/shm
+tmpfs                                189G   11M  189G   1% /run
+tmpfs                                189G     0  189G   0% /sys/fs/cgroup
+/dev/mapper/rootvg-rootlv            4.8G  2.7G  1.9G  60% /
+/dev/mapper/rootvg-usrlv             5.8G  3.2G  2.4G  58% /usr
+/dev/sda2                            976M  208M  702M  23% /boot
+/dev/sda1                            200M  8.3M  192M   5% /boot/efi
+/dev/sdf1                            3.7T  1.9T  1.8T  51% /hadoop05
+/dev/sdb1                            3.7T  2.0T  1.7T  55% /hadoop01
+/dev/sdh1                            3.7T  2.1T  1.7T  56% /hadoop07
+/dev/sdj1                            3.7T  1.6T  2.1T  43% /hadoop09
+/dev/mapper/rootvg-hdpadmlv           30G   45M   28G   1% /hadoopadmin
+/dev/sde1                            3.7T  1.7T  2.0T  47% /hadoop04
+/dev/sdg1                            3.7T  2.0T  1.7T  54% /hadoop06
+/dev/sdl1                            3.7T  1.9T  1.9T  50% /hadoop11
+/dev/sdc1                            3.7T  2.1T  1.7T  56% /hadoop02
+/dev/sdm2                            3.6T  2.0T  1.7T  54% /hadoop12
+/dev/sdk1                            3.7T  2.2T  1.5T  60% /hadoop10
+/dev/sdi1                            3.7T  2.1T  1.7T  56% /hadoop08
+/dev/mapper/rootvg-homelv            976M  3.7M  906M   1% /home
+/dev/mapper/rootvg-optlv             4.8G  2.7G  1.9G  59% /opt
+/dev/mapper/rootvg-usrhdplv           50G  1.7G   45G   4% /usr/hdp
+/dev/mapper/rootvg-dynatracelv       4.8G  1.4G  3.2G  31% /opt/dynatrace
+/dev/sdm1                             40G   67M   40G   1% /opt/wandisco
+/dev/mapper/rootvg-dataprotectionlv  7.8G  1.3G  6.2G  17% /opt/dataprotection
+/dev/mapper/rootvg-zenalv            488M  141M  312M  32% /opt/zena
+/dev/mapper/rootvg-varlv             7.8G  3.9G  3.5G  53% /var
+/dev/mapper/rootvg-taniumlv          9.8G  2.1G  7.2G  23% /opt/Tanium
+/dev/mapper/rootvg-stagelv           9.8G   37M  9.2G   1% /var/tmp/stage
+/dev/mapper/rootvg-corelv            4.8G   20M  4.6G   1% /var/core
+/dev/mapper/rootvg-tmplv             197G   74M  187G   1% /tmp
+/dev/mapper/rootvg-varloglv          197G   53G  135G  28% /var/log
+tmpfs                                 38G     0   38G   0% /run/user/0
+[root@pwausldnapp182 ~]# lsblk
+NAME                        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda                           8:0    0 931.5G  0 disk
+├─sda1                        8:1    0   200M  0 part /boot/efi
+├─sda2                        8:2    0     1G  0 part /boot
+└─sda3                        8:3    0 930.3G  0 part
+  ├─rootvg-rootlv           253:0    0     5G  0 lvm  /
+  ├─rootvg-swaplv           253:1    0     4G  0 lvm  [SWAP]
+  ├─rootvg-usrlv            253:2    0     6G  0 lvm  /usr
+  ├─rootvg-usrhdplv         253:3    0    50G  0 lvm  /usr/hdp
+  ├─rootvg-hdpadmlv         253:4    0    30G  0 lvm  /hadoopadmin
+  ├─rootvg-tmplv            253:5    0   200G  0 lvm  /tmp
+  ├─rootvg-optlv            253:6    0     5G  0 lvm  /opt
+  ├─rootvg-homelv           253:7    0     1G  0 lvm  /home
+  ├─rootvg-stagelv          253:8    0    10G  0 lvm  /var/tmp/stage
+  ├─rootvg-varloglv         253:9    0   200G  0 lvm  /var/log
+  ├─rootvg-corelv           253:10   0     5G  0 lvm  /var/core
+  ├─rootvg-varlv            253:11   0     8G  0 lvm  /var
+  ├─rootvg-zenalv           253:12   0   512M  0 lvm  /opt/zena
+  ├─rootvg-ovlogslv         253:13   0     1G  0 lvm
+  ├─rootvg-dynatracelv      253:14   0     5G  0 lvm  /opt/dynatrace
+  ├─rootvg-dataprotectionlv 253:15   0     8G  0 lvm  /opt/dataprotection
+  └─rootvg-taniumlv         253:16   0    10G  0 lvm  /opt/Tanium
+sdb                           8:16   0   3.7T  0 disk
+└─sdb1                        8:17   0   3.7T  0 part /hadoop01
+sdc                           8:32   0   3.7T  0 disk
+└─sdc1                        8:33   0   3.7T  0 part /hadoop02
+sdd                           8:48   0   3.7T  0 disk
+sde                           8:64   0   3.7T  0 disk
+└─sde1                        8:65   0   3.7T  0 part /hadoop04
+sdf                           8:80   0   3.7T  0 disk
+└─sdf1                        8:81   0   3.7T  0 part /hadoop05
+sdg                           8:96   0   3.7T  0 disk
+└─sdg1                        8:97   0   3.7T  0 part /hadoop06
+sdh                           8:112  0   3.7T  0 disk
+└─sdh1                        8:113  0   3.7T  0 part /hadoop07
+sdi                           8:128  0   3.7T  0 disk
+└─sdi1                        8:129  0   3.7T  0 part /hadoop08
+sdj                           8:144  0   3.7T  0 disk
+└─sdj1                        8:145  0   3.7T  0 part /hadoop09
+sdk                           8:160  0   3.7T  0 disk
+└─sdk1                        8:161  0   3.7T  0 part /hadoop10
+sdl                           8:176  0   3.7T  0 disk
+└─sdl1                        8:177  0   3.7T  0 part /hadoop11
+sdm                           8:192  0   3.7T  0 disk
+├─sdm1                        8:193  0    40G  0 part /opt/wandisco
+└─sdm2                        8:194  0   3.6T  0 part /hadoop12
+[root@pwausldnapp182 ~]# df -h /hadoop03
+Filesystem                 Size  Used Avail Use% Mounted on
+/dev/mapper/rootvg-rootlv  4.8G  2.7G  1.9G  60% /
+[root@pwausldnapp182 ~]# parted /dev/sdd
+GNU Parted 3.1
+Using /dev/sdd
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted) mklabel gpt
+(parted) mkpart primary xfs 1049kb 100%
+(parted) w
+  align-check TYPE N                        check partition N for TYPE(min|opt) alignment
+  help [COMMAND]                           print general help, or help on COMMAND
+  mklabel,mktable LABEL-TYPE               create a new disklabel (partition table)
+  mkpart PART-TYPE [FS-TYPE] START END     make a partition
+  name NUMBER NAME                         name partition NUMBER as NAME
+  print [devices|free|list,all|NUMBER]     display the partition table, available devices, free space, all found partitions, or a particular partition
+  quit                                     exit program
+  rescue START END                         rescue a lost partition near START and END
+
+  resizepart NUMBER END                    resize partition NUMBER
+  rm NUMBER                                delete partition NUMBER
+  select DEVICE                            choose the device to edit
+  disk_set FLAG STATE                      change the FLAG on selected device
+  disk_toggle [FLAG]                       toggle the state of FLAG on selected device
+  set NUMBER FLAG STATE                    change the FLAG on partition NUMBER
+  toggle [NUMBER [FLAG]]                   toggle the state of FLAG on partition NUMBER
+  unit UNIT                                set the default unit to UNIT
+  version                                  display the version number and copyright information of GNU Parted
+(parted) q
+Information: You may need to update /etc/fstab.
+
+[root@pwausldnapp182 ~]# lsblk
+NAME                        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda                           8:0    0 931.5G  0 disk
+├─sda1                        8:1    0   200M  0 part /boot/efi
+├─sda2                        8:2    0     1G  0 part /boot
+└─sda3                        8:3    0 930.3G  0 part
+  ├─rootvg-rootlv           253:0    0     5G  0 lvm  /
+  ├─rootvg-swaplv           253:1    0     4G  0 lvm  [SWAP]
+  ├─rootvg-usrlv            253:2    0     6G  0 lvm  /usr
+  ├─rootvg-usrhdplv         253:3    0    50G  0 lvm  /usr/hdp
+  ├─rootvg-hdpadmlv         253:4    0    30G  0 lvm  /hadoopadmin
+  ├─rootvg-tmplv            253:5    0   200G  0 lvm  /tmp
+  ├─rootvg-optlv            253:6    0     5G  0 lvm  /opt
+  ├─rootvg-homelv           253:7    0     1G  0 lvm  /home
+  ├─rootvg-stagelv          253:8    0    10G  0 lvm  /var/tmp/stage
+  ├─rootvg-varloglv         253:9    0   200G  0 lvm  /var/log
+  ├─rootvg-corelv           253:10   0     5G  0 lvm  /var/core
+  ├─rootvg-varlv            253:11   0     8G  0 lvm  /var
+  ├─rootvg-zenalv           253:12   0   512M  0 lvm  /opt/zena
+  ├─rootvg-ovlogslv         253:13   0     1G  0 lvm
+  ├─rootvg-dynatracelv      253:14   0     5G  0 lvm  /opt/dynatrace
+  ├─rootvg-dataprotectionlv 253:15   0     8G  0 lvm  /opt/dataprotection
+  └─rootvg-taniumlv         253:16   0    10G  0 lvm  /opt/Tanium
+sdb                           8:16   0   3.7T  0 disk
+└─sdb1                        8:17   0   3.7T  0 part /hadoop01
+sdc                           8:32   0   3.7T  0 disk
+└─sdc1                        8:33   0   3.7T  0 part /hadoop02
+sdd                           8:48   0   3.7T  0 disk
+└─sdd1                        8:49   0   3.7T  0 part
+sde                           8:64   0   3.7T  0 disk
+└─sde1                        8:65   0   3.7T  0 part /hadoop04
+sdf                           8:80   0   3.7T  0 disk
+└─sdf1                        8:81   0   3.7T  0 part /hadoop05
+sdg                           8:96   0   3.7T  0 disk
+└─sdg1                        8:97   0   3.7T  0 part /hadoop06
+sdh                           8:112  0   3.7T  0 disk
+└─sdh1                        8:113  0   3.7T  0 part /hadoop07
+sdi                           8:128  0   3.7T  0 disk
+└─sdi1                        8:129  0   3.7T  0 part /hadoop08
+sdj                           8:144  0   3.7T  0 disk
+└─sdj1                        8:145  0   3.7T  0 part /hadoop09
+sdk                           8:160  0   3.7T  0 disk
+└─sdk1                        8:161  0   3.7T  0 part /hadoop10
+sdl                           8:176  0   3.7T  0 disk
+└─sdl1                        8:177  0   3.7T  0 part /hadoop11
+sdm                           8:192  0   3.7T  0 disk
+├─sdm1                        8:193  0    40G  0 part /opt/wandisco
+└─sdm2                        8:194  0   3.6T  0 part /hadoop12
+[root@pwausldnapp182 ~]# blkid
+/dev/mapper/rootvg-rootlv: UUID="695d4d1c-5483-4efc-ae99-850fa205c213" TYPE="ext4"
+/dev/mapper/rootvg-varlv: UUID="2a0c4746-af70-4fa3-9acd-59b509b711e7" TYPE="ext4"
+/dev/sda3: UUID="k0JpPX-yvCo-7gdH-tXH6-Ha7x-P6J0-aAZXXB" TYPE="LVM2_member" PARTUUID="8590918a-5aba-46fe-b4ad-95c0a9b67499"
+/dev/sdc1: UUID="9ca27ef2-8695-48f4-a9de-8e87b3b7bb98" TYPE="xfs" PARTUUID="f5fcee6e-53e7-4724-892d-4aa17aa948e7"
+/dev/sdb1: UUID="1e7bcc6d-3bc6-442f-bfa1-cd22429b5efb" TYPE="xfs" PARTUUID="8f601c41-1a22-4dca-8418-218cb5d03b1d"
+/dev/sdf1: UUID="909dd260-68a4-426b-b334-4a122d283cb9" TYPE="xfs" PARTUUID="ee160ff0-df03-4098-ac9e-fee1a33e34c5"
+/dev/sdd1: PARTLABEL="primary" PARTUUID="805c3d98-3f0f-4dbe-90fb-d357d5b50270"
+/dev/sde1: UUID="4d9e8cca-8b61-4b39-a8d1-83107a1eacc6" TYPE="xfs" PARTUUID="210f0b3b-75eb-4bc5-b21c-84325d911e6e"
+/dev/sdg1: UUID="1ef1cdde-1611-49ac-80ac-eee539e944b9" TYPE="xfs" PARTUUID="9ca0f0e1-d6e7-49cb-a89f-cd111e03627a"
+/dev/sdh1: UUID="fa85a989-4509-4f5a-a383-7b9b9fce68b4" TYPE="xfs" PARTUUID="76856f15-2294-445a-b9ee-39b29d71918c"
+/dev/sdi1: UUID="9ee0206f-a827-49e3-98af-e4212fb5b889" TYPE="xfs" PARTUUID="af31d8c4-2df3-4143-8738-6e358def7cae"
+/dev/sdj1: UUID="b1024da7-1c38-49d7-bf27-261655e36dbe" TYPE="xfs" PARTLABEL="primary" PARTUUID="752b3ffa-8fe6-464c-8300-2329bc0f2d62"
+/dev/sdk1: UUID="2cf30f5a-50c3-40df-8b66-776451c2d61c" TYPE="xfs" PARTUUID="8a683977-4189-4308-a005-91f5c54049b1"
+/dev/sdl1: UUID="65158a8c-7ad2-4116-b9e8-2b320ccc66e3" TYPE="xfs" PARTLABEL="primary" PARTUUID="e2e79624-4c09-4a13-b8ce-df2ee592263a"
+/dev/sdm1: UUID="d5ddc781-be34-43c5-8340-47dd1fe420ff" TYPE="xfs" PARTUUID="4664cb2c-dfa6-4dda-b71b-48ad8a3890a5"
+/dev/sdm2: UUID="7aee7ac1-df84-4dd4-a448-82ac53fae9a9" TYPE="xfs" PARTUUID="e25567a9-3dca-47b2-a3e8-31eec879fda3"
+/dev/sda1: SEC_TYPE="msdos" UUID="0C17-ABD0" TYPE="vfat" PARTLABEL="EFI System Partition" PARTUUID="1d37452f-43f7-4d94-bb06-27248ae7b97f"
+/dev/sda2: UUID="80b469e3-396a-4e2e-80e9-effe4db2741c" TYPE="ext4" PARTUUID="10a12b8f-f609-445c-8f60-1440cd64be6d"
+/dev/mapper/rootvg-swaplv: UUID="9ed38032-7176-4633-bf0f-ab7a6aebe404" TYPE="swap"
+/dev/mapper/rootvg-usrlv: UUID="3ab2663d-1bb0-4305-a0a4-f99fa6ba7cae" TYPE="ext4"
+/dev/mapper/rootvg-usrhdplv: UUID="34e648fe-55cb-4df8-90ef-8285d9b963d7" TYPE="ext4"
+/dev/mapper/rootvg-hdpadmlv: UUID="71095587-fcd8-47b2-a077-e673e66c43f4" TYPE="ext4"
+/dev/mapper/rootvg-tmplv: UUID="a06fd5f4-3a60-41aa-938c-2c9df4900fed" TYPE="ext4"
+/dev/mapper/rootvg-optlv: UUID="6d3a5b5e-e63c-4be3-95f1-f96520ed784e" TYPE="ext4"
+/dev/mapper/rootvg-homelv: UUID="c1c8e3e1-71a6-400c-b63c-35953622135e" TYPE="ext4"
+/dev/mapper/rootvg-stagelv: UUID="5d366b47-22f8-4444-a867-f25b5a25acd4" TYPE="ext4"
+/dev/mapper/rootvg-varloglv: UUID="badbd55d-2d95-429d-a25d-870cc12387eb" TYPE="ext4"
+/dev/mapper/rootvg-corelv: UUID="60cfcc68-2bc6-46fc-a633-b0c19f2c4290" TYPE="ext4"
+/dev/mapper/rootvg-zenalv: UUID="e62d3a35-a94c-4761-a7e7-267dfd76c95c" TYPE="ext4"
+/dev/mapper/rootvg-ovlogslv: UUID="7d6e2a47-a673-413f-98cf-5b7f9c8fed12" TYPE="ext4"
+/dev/mapper/rootvg-dynatracelv: UUID="1e4be85c-357c-4d4b-9aa0-cecdf84b94d8" TYPE="ext4"
+/dev/mapper/rootvg-dataprotectionlv: UUID="07c62447-a2db-42b3-a301-d6cd21adb800" TYPE="ext4"
+/dev/mapper/rootvg-taniumlv: UUID="7ee1e11d-2ea2-4c34-9d4b-ba1f25f61bc3" TYPE="ext4"
+[root@pwausldnapp182 ~]# mkfs.xfs /dev/sdd1
+meta-data=/dev/sdd1              isize=512    agcount=32, agsize=30523328 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=976745984, imaxpct=5
+         =                       sunit=64     swidth=64 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=476928, version=2
+         =                       sectsz=512   sunit=64 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+[root@pwausldnapp182 ~]# blkid
+/dev/mapper/rootvg-rootlv: UUID="695d4d1c-5483-4efc-ae99-850fa205c213" TYPE="ext4"
+/dev/mapper/rootvg-varlv: UUID="2a0c4746-af70-4fa3-9acd-59b509b711e7" TYPE="ext4"
+/dev/sda3: UUID="k0JpPX-yvCo-7gdH-tXH6-Ha7x-P6J0-aAZXXB" TYPE="LVM2_member" PARTUUID="8590918a-5aba-46fe-b4ad-95c0a9b67499"
+/dev/sdc1: UUID="9ca27ef2-8695-48f4-a9de-8e87b3b7bb98" TYPE="xfs" PARTUUID="f5fcee6e-53e7-4724-892d-4aa17aa948e7"
+/dev/sdb1: UUID="1e7bcc6d-3bc6-442f-bfa1-cd22429b5efb" TYPE="xfs" PARTUUID="8f601c41-1a22-4dca-8418-218cb5d03b1d"
+/dev/sdf1: UUID="909dd260-68a4-426b-b334-4a122d283cb9" TYPE="xfs" PARTUUID="ee160ff0-df03-4098-ac9e-fee1a33e34c5"
+/dev/sde1: UUID="4d9e8cca-8b61-4b39-a8d1-83107a1eacc6" TYPE="xfs" PARTUUID="210f0b3b-75eb-4bc5-b21c-84325d911e6e"
+/dev/sdg1: UUID="1ef1cdde-1611-49ac-80ac-eee539e944b9" TYPE="xfs" PARTUUID="9ca0f0e1-d6e7-49cb-a89f-cd111e03627a"
+/dev/sdh1: UUID="fa85a989-4509-4f5a-a383-7b9b9fce68b4" TYPE="xfs" PARTUUID="76856f15-2294-445a-b9ee-39b29d71918c"
+/dev/sdi1: UUID="9ee0206f-a827-49e3-98af-e4212fb5b889" TYPE="xfs" PARTUUID="af31d8c4-2df3-4143-8738-6e358def7cae"
+/dev/sdj1: UUID="b1024da7-1c38-49d7-bf27-261655e36dbe" TYPE="xfs" PARTLABEL="primary" PARTUUID="752b3ffa-8fe6-464c-8300-2329bc0f2d62"
+/dev/sdk1: UUID="2cf30f5a-50c3-40df-8b66-776451c2d61c" TYPE="xfs" PARTUUID="8a683977-4189-4308-a005-91f5c54049b1"
+/dev/sdl1: UUID="65158a8c-7ad2-4116-b9e8-2b320ccc66e3" TYPE="xfs" PARTLABEL="primary" PARTUUID="e2e79624-4c09-4a13-b8ce-df2ee592263a"
+/dev/sdm1: UUID="d5ddc781-be34-43c5-8340-47dd1fe420ff" TYPE="xfs" PARTUUID="4664cb2c-dfa6-4dda-b71b-48ad8a3890a5"
+/dev/sdm2: UUID="7aee7ac1-df84-4dd4-a448-82ac53fae9a9" TYPE="xfs" PARTUUID="e25567a9-3dca-47b2-a3e8-31eec879fda3"
+/dev/sda1: SEC_TYPE="msdos" UUID="0C17-ABD0" TYPE="vfat" PARTLABEL="EFI System Partition" PARTUUID="1d37452f-43f7-4d94-bb06-27248ae7b97f"
+/dev/sda2: UUID="80b469e3-396a-4e2e-80e9-effe4db2741c" TYPE="ext4" PARTUUID="10a12b8f-f609-445c-8f60-1440cd64be6d"
+/dev/mapper/rootvg-swaplv: UUID="9ed38032-7176-4633-bf0f-ab7a6aebe404" TYPE="swap"
+/dev/mapper/rootvg-usrlv: UUID="3ab2663d-1bb0-4305-a0a4-f99fa6ba7cae" TYPE="ext4"
+/dev/mapper/rootvg-usrhdplv: UUID="34e648fe-55cb-4df8-90ef-8285d9b963d7" TYPE="ext4"
+/dev/mapper/rootvg-hdpadmlv: UUID="71095587-fcd8-47b2-a077-e673e66c43f4" TYPE="ext4"
+/dev/mapper/rootvg-tmplv: UUID="a06fd5f4-3a60-41aa-938c-2c9df4900fed" TYPE="ext4"
+/dev/mapper/rootvg-optlv: UUID="6d3a5b5e-e63c-4be3-95f1-f96520ed784e" TYPE="ext4"
+/dev/mapper/rootvg-homelv: UUID="c1c8e3e1-71a6-400c-b63c-35953622135e" TYPE="ext4"
+/dev/mapper/rootvg-stagelv: UUID="5d366b47-22f8-4444-a867-f25b5a25acd4" TYPE="ext4"
+/dev/mapper/rootvg-varloglv: UUID="badbd55d-2d95-429d-a25d-870cc12387eb" TYPE="ext4"
+/dev/mapper/rootvg-corelv: UUID="60cfcc68-2bc6-46fc-a633-b0c19f2c4290" TYPE="ext4"
+/dev/mapper/rootvg-zenalv: UUID="e62d3a35-a94c-4761-a7e7-267dfd76c95c" TYPE="ext4"
+/dev/mapper/rootvg-ovlogslv: UUID="7d6e2a47-a673-413f-98cf-5b7f9c8fed12" TYPE="ext4"
+/dev/mapper/rootvg-dynatracelv: UUID="1e4be85c-357c-4d4b-9aa0-cecdf84b94d8" TYPE="ext4"
+/dev/mapper/rootvg-dataprotectionlv: UUID="07c62447-a2db-42b3-a301-d6cd21adb800" TYPE="ext4"
+/dev/mapper/rootvg-taniumlv: UUID="7ee1e11d-2ea2-4c34-9d4b-ba1f25f61bc3" TYPE="ext4"
+/dev/sdd1: UUID="0dcac09b-19c3-408b-b989-dd0cf19ae481" TYPE="xfs" PARTLABEL="primary" PARTUUID="805c3d98-3f0f-4dbe-90fb-d357d5b50270"
+[root@pwausldnapp182 ~]# vi /etc/fstab
+[root@pwausldnapp182 ~]# mount -a
+[root@pwausldnapp182 ~]# df -h
+Filesystem                           Size  Used Avail Use% Mounted on
+devtmpfs                             189G     0  189G   0% /dev
+tmpfs                                189G   28K  189G   1% /dev/shm
+tmpfs                                189G   11M  189G   1% /run
+tmpfs                                189G     0  189G   0% /sys/fs/cgroup
+/dev/mapper/rootvg-rootlv            4.8G  2.7G  1.9G  60% /
+/dev/mapper/rootvg-usrlv             5.8G  3.2G  2.4G  58% /usr
+/dev/sda2                            976M  208M  702M  23% /boot
+/dev/sda1                            200M  8.3M  192M   5% /boot/efi
+/dev/sdf1                            3.7T  1.9T  1.8T  51% /hadoop05
+/dev/sdb1                            3.7T  2.0T  1.7T  55% /hadoop01
+/dev/sdh1                            3.7T  2.1T  1.7T  56% /hadoop07
+/dev/sdj1                            3.7T  1.6T  2.1T  43% /hadoop09
+/dev/mapper/rootvg-hdpadmlv           30G   45M   28G   1% /hadoopadmin
+/dev/sde1                            3.7T  1.7T  2.0T  47% /hadoop04
+/dev/sdg1                            3.7T  2.0T  1.7T  54% /hadoop06
+/dev/sdl1                            3.7T  1.9T  1.9T  50% /hadoop11
+/dev/sdc1                            3.7T  2.0T  1.7T  55% /hadoop02
+/dev/sdm2                            3.6T  2.0T  1.7T  54% /hadoop12
+/dev/sdk1                            3.7T  2.2T  1.5T  60% /hadoop10
+/dev/sdi1                            3.7T  2.1T  1.7T  56% /hadoop08
+/dev/mapper/rootvg-homelv            976M  3.7M  906M   1% /home
+/dev/mapper/rootvg-optlv             4.8G  2.7G  1.9G  59% /opt
+/dev/mapper/rootvg-usrhdplv           50G  1.7G   45G   4% /usr/hdp
+/dev/mapper/rootvg-dynatracelv       4.8G  1.4G  3.2G  31% /opt/dynatrace
+/dev/sdm1                             40G   67M   40G   1% /opt/wandisco
+/dev/mapper/rootvg-dataprotectionlv  7.8G  1.3G  6.2G  17% /opt/dataprotection
+/dev/mapper/rootvg-zenalv            488M  141M  312M  32% /opt/zena
+/dev/mapper/rootvg-varlv             7.8G  3.9G  3.5G  53% /var
+/dev/mapper/rootvg-taniumlv          9.8G  2.1G  7.2G  23% /opt/Tanium
+/dev/mapper/rootvg-stagelv           9.8G   37M  9.2G   1% /var/tmp/stage
+/dev/mapper/rootvg-corelv            4.8G   20M  4.6G   1% /var/core
+/dev/mapper/rootvg-tmplv             197G   74M  187G   1% /tmp
+/dev/mapper/rootvg-varloglv          197G   52G  136G  28% /var/log
+tmpfs                                 38G     0   38G   0% /run/user/0
+tmpfs                                 38G     0   38G   0% /run/user/1015
+/dev/sdd1                            3.7T   34M  3.7T   1% /hadoop03
+[root@pwausldnapp182 ~]#
+
+
+lvcreate -L 20G -n etlxferinlv appsvg		
+
+mkfs.xfs /dev/mapper/appsvg-etlxferinlv
+
+mkdir -p /etl/prod/xferin
+
+neelapu_aravind@bcbsil.com
+Aravind@123
+
+INC4919056
+HI @Tony Munoz,
+
+We have checked but from our end we could not find the source IP for the ID DSOPR . and we could failed login attempts is 0. Please check and let us know if anything required from our end. Please reach to us we will available 24/7.
+
+[root@twauslidsdb04 ~]# pam_tally2 -u dsopr
+Login           Failures Latest failure     From
+dsopr               0
+[root@twauslidsdb04 ~]#
+  
+
+commands to uninstall Commvault
+/opt/dataprotection/commvault/
+cvpkgrm
+rm -rf /etc/CommvaultRegistry
+rm -rf /opt/commvault
+

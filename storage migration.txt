@@ -1,0 +1,247 @@
+1002  powermt version
+ 1003  powermt display
+ 1004  powermt display dev=all
+ 1005  lsblk
+ 1006  cd /sys/class/scsi_host
+ 1007  for i in `ls`; do echo "- - -" > $i/scan; done
+ 1008  ls -lstr
+ 1009  powermt config
+ 1010  powermt check
+ 1011  powermt save
+ 1012  powermt display dev=all
+ 1013  lvmdisckscan
+ 1014  lvmdiskscan
+ 1015  cd /tmp
+ 1016  mkdir emcpp/
+ 1017  cd emcpp/
+ 1018  ls -lstr
+ 1019  clear
+ 1020  ls -lstr
+ 1021  tar -xvf DellPower.LINUX-8.2.0.b115.tar
+ 1022  ls -lstr
+ 1023  cat /etc/redhat-release
+ 1024  /etc/opt/emcpower/pre_ndu_health_check.sh
+ 1025  export PP_NDU_ENABLE=1
+ 1026  clear
+ 1027  rpm -Uvh DellPower.LINUX-8.2.0.00.00-115.RHEL8.x86_64.rpm
+ 1028  powermt version
+ 1029  lsblk
+ 1030  powermt display dev=all
+ 1031  for LUN in `powermt display dev=all | grep "Pseudo name" | awk -F"=" '{print $NF}'`; do WWN=$(powermt display dev=$LUN | grep WWN | awk -F"=" ' {print $NF}'); T_PTH=$(powermt display dev=$LUN | grep "active   alive" | wc -l); size=$(lvmdiskscan | grep -w $LUN);echo "$LUN - $WWN : $T_PTH : $size"; done | tee /tm p/nks1
+ 1032  history
+[root@twausleceap18 emcpp]#
+
+
+968  powermt version
+  969  cd /tmp/emcpp/
+  970  ls -ltr
+  971  /etc/opt/emcpower/pre_ndu_health_check.sh
+  972  export PP_NDU_ENABLE=1
+  973  rpm -Uvh DellPower.LINUX-8.2.0.00.00-115.RHEL8.x86_64.rpm
+  974  cat /etc/redhat-release
+  975  clear
+  976  ls -ltr
+  977  gunzip -d DellPower.LINUX-8.2.0.b115.tar.gz
+  978  ls -ltr
+  979  tar -xvf DellPower.LINUX-8.2.0.b115.tar
+  980  ls -ltr
+  981  rpm -Uvh DellPower.LINUX-8.2.0.00.00-115.RHEL8.x86_64.rpm
+  982  powermt version
+  983  lsblk
+  984  lvmdiskscan
+  985  for LUN in `powermt display dev=all | grep "Pseudo name" | awk -F"=" '{print $NF}'`; do WWN=$(powermt display dev=$LUN | grep WWN | awk -F"=" ' {print $NF}'); T_PTH=$(powermt display dev=$LUN | grep "active   alive" | wc -l); size=$(lvmdiskscan | grep -w $LUN);echo "$LUN - $WWN : $T_PTH : $size"; done | tee /tm p/nks1
+  986  cd /tmp
+  987  cd emctp
+  988  cd emcpp/
+  989  ls -ltr
+  990  scp DellPower.LINUX-8.2.0.b115.tar root@twausleceap18.app.test.hcscint.net:/tmp/emcpp/
+  991  for LUN in `powermt display dev=all | grep "Pseudo name" | awk -F"=" '{print $NF}'`; do WWN=$(powermt display dev=$LUN | grep WWN | awk -F"=" ' {print $NF}'); T_PTH=$(powermt display dev=$LUN | grep "active   alive" | wc -l); size=$(lvmdiskscan | grep -w $LUN);echo "$LUN - $WWN : $T_PTH : $size"; done | tee /tm p/nks1
+  992  history
+[root@twausleceap17 emcpp]#
+
+
+
+[root@twauslaenapp09 ~]# uptime
+ 15:42:49 up 51 days,  3:14,  9 users,  load average: 19.48, 22.65, 24.12
+[root@twauslaenapp10 ~]# uptime
+ 15:46:04 up 51 days,  3:38,  5 users,  load average: 26.41, 25.19, 24.74
+[root@twauslaenapp11 ~]# uptime
+ 15:49:05 up 14 days,  4:13,  6 users,  load average: 32.07, 24.77, 42.26
+[root@twauslaenapp12 ~]# uptime
+ 15:50:18 up 27 days, 21:18,  1 user,  load average: 2.69, 1.84, 1.75
+
+ Agent User Name                : svczena
+ Agent Directory                : /opt/ctm/ctm
+ Agent Platform Architecture    : Linux
+ Agent Version                  : 9.0.20.200
+ Agent Host Name                : pwauslorbora20
+ Logical Agent Name             : pwauslorbora20.app.hcscint.net
+ Listen to Network Interface    : *ANY
+ Server Host Name               : PWAUSWAPP02.ADHCSCINT.NET
+ Authorized Servers Host Names  : pwauswapp02.adhcscint.net pwauswapp03.adhcscint.net
+ Server-to-Agent Port Number    : 7006
+ Agent-to-Server Port Number    : 7005
+ Server-Agent Protocol Version  : 13
+ Server-Agent Comm. Protocol    : TCP
+ Server-Agent Connection mode   : Persistent
+ Allow agent to init connection : Yes
+ Unix Ping to Server Platform   : Succeeded
+ Agent Ping to Control-M/Server : Succeeded
+
+ Agent processes status
+ ======================
+ Agent Router                   : Running as svczena (4148612)
+ Java services                  : ["housekeeping","ssh-courier"] on port 25453
+ Agent Listener                 : Running as svczena (4148696)
+ Agent Tracker                  : Running as svczena (4148840)
+ Agent Tracker-Worker           : Running as svczena (4148850)
+
+[svczena@pwauslorbora20 scripts]$ date
+Wed Jul 10 16:44:18 CDT 2024
+
+Incident INC4245898 has been assigned to group MSP_IntegratedMonitoring_BatchOperations P5 - Standard
+
+[root@pwauslorbora20 ~]# ps -ef | grep -i ctm
+root       22592   16978  0 16:16 pts/0    00:00:00 grep -i ctm
+svczena  4148383       1  1 15:51 pts/1    00:00:30 /home/svczena/bmcjava/bmcjava-V3/bin/java -Xmx256m -XX:+CrashOnOutOfMemoryError -Djava.io.tmpdir=/tmp -Djava.net.preferIPv4Stack=true -Doverride.default.services= -Dspring.profiles.active=tcp -DCTMAG.CONFIG.DBGLVL=0 -Dctm.logs.dir=/opt/ctm/ctm/proclog -Dlogging.config=/opt/ctm/ctm/data/logback.xml -Dctm.data.dir=/opt/ctm/ctm/data -Dstdout=/opt/ctm/ctm/proclog/agjstd_4148208-2024-07-10.0.tmp -jar /opt/ctm/ctm/exe/ag-app.jar
+svczena  4148612       1  0 15:51 pts/1    00:00:07 /opt/ctm/ctm/exe/p_ctmar
+svczena  4148696       1  0 15:51 pts/1    00:00:00 /opt/ctm/ctm/exe/p_ctmag
+svczena  4148840       1  0 15:51 pts/1    00:00:00 /opt/ctm/ctm/exe/p_ctmat
+svczena  4148850 4148840  0 15:51 pts/1    00:00:00 /opt/ctm/ctm/exe/p_ctmatw -ATW_NAME ATW000
+[root@pwauslorbora20 ~]# cd ./start-ag
+-bash: cd: ./start-ag: No such file or directory
+[root@pwauslorbora20 ~]# clear
+[root@pwauslorbora20 ~]# ps -ef | grep -i ctm
+root       63138   16978  0 16:33 pts/0    00:00:00 grep -i ctm
+svczena  4148383       1  1 15:51 ?        00:00:31 /home/svczena/bmcjava/bmcjava-V3/bin/java -Xmx256m -XX:+CrashOnOutOfMemoryError -Djava.io.tmpdir=/tmp -Djava.net.preferIPv4Stack=true -Doverride.default.services= -Dspring.profiles.active=tcp -DCTMAG.CONFIG.DBGLVL=0 -Dctm.logs.dir=/opt/ctm/ctm/proclog -Dlogging.config=/opt/ctm/ctm/data/logback.xml -Dctm.data.dir=/opt/ctm/ctm/data -Dstdout=/opt/ctm/ctm/proclog/agjstd_4148208-2024-07-10.0.tmp -jar /opt/ctm/ctm/exe/ag-app.jar
+svczena  4148612       1  0 15:51 ?        00:00:07 /opt/ctm/ctm/exe/p_ctmar
+svczena  4148696       1  0 15:51 ?        00:00:00 /opt/ctm/ctm/exe/p_ctmag
+svczena  4148840       1  0 15:51 ?        00:00:00 /opt/ctm/ctm/exe/p_ctmat
+svczena  4148850 4148840  0 15:51 ?        00:00:00 /opt/ctm/ctm/exe/p_ctmatw -ATW_NAME ATW000
+[root@pwauslorbora20 ~]# cd /opt/ctm/ctm/scripts
+[root@pwauslorbora20 scripts]# ll
+total 228
+-rwxr-xr-x 1 svczena zenagrp  1776 Sep  1  2021 ag_check_jobs
+-rwxr-xr-x 1 svczena zenagrp 12690 Sep  1  2021 ag_diag_comm
+-rwxr-xr-x 1 svczena zenagrp  1698 Sep  1  2021 archive_bmcjava.sh
+-rwxr-xr-x 1 svczena zenagrp  3003 Sep  1  2021 archive.sh
+-rwxr-xr-x 1 svczena zenagrp  3025 Sep  1  2021 check_nfs_can_run.sh
+-rwxr-xr-x 1 svczena zenagrp  2505 Sep  1  2021 check_os_version
+-rwxr-xr-x 1 svczena zenagrp  2311 Sep  1  2021 get_cpu.sh
+-rwxr-xr-x 1 svczena zenagrp  2369 Sep  1  2021 handle_jre_downgrade.sh
+-rwxr-xr-x 1 svczena zenagrp  3559 Sep  1  2021 io_benchmark.sh
+-rwxr-xr-x 1 svczena zenagrp  4202 Sep  1  2021 jre_validation.pl
+-rwxr-xr-x 1 svczena zenagrp   446 Sep  1  2021 jre_validation.sh
+-rwxr-xr-x 1 svczena zenagrp  4621 Sep  1  2021 keygen.sh
+-rwxr-xr-x 1 svczena zenagrp  5517 Sep  1  2021 merge_dailylog.pl
+-rwxr-xr-x 1 svczena zenagrp   982 Sep  1  2021 merge_dailylog.sh
+-rwxr-xr-x 1 svczena zenagrp  2087 Jul 10 15:49 rc.agent_user
+-rwxr-xr-x 1 svczena zenagrp 29128 Sep  1  2021 set_agent_mode
+-rwxr-xr-x 1 svczena zenagrp 16692 Sep  1  2021 shagent
+-rwxr-xr-x 1 svczena zenagrp  3361 Sep  1  2021 sharch
+-rwxr-xr-x 1 svczena zenagrp 31134 Sep  1  2021 shut-ag
+-rwxr-xr-x 1 svczena zenagrp 55826 Sep  1  2021 start-ag
+[root@pwauslorbora20 scripts]# ./start-ag
+
+ Enter Control-M/Agent UNIX username [svczena]:
+
+ Enter Control-M/Agent Process Name <AG|AT|AR|AGJ|ALL> [ALL]:
+
+ The agent was previously running as 'svczena'.
+ You have chosen to start the agent as 'root'.
+
+ After the agent starts, you should execute the '/opt/ctm/ctm/scripts/set_agent_mode' script
+ and disable non-root mode.
+
+ Do you want to continue ? [Y/N]: y
+
+
+Starting the agent as 'root' user
+
+Control-M/Agent java process is already running. Pid=4148383, Port=25453
+Control-M/Agent Router is already running.
+Control-M/Agent Listener is already running.
+Control-M/Agent Tracker is already running.
+[root@pwauslorbora20 scripts]# su -zena
+su: invalid option -- 'z'
+Try 'su --help' for more information.
+[root@pwauslorbora20 scripts]# su - svczena
+Last login: Wed Jul 10 16:37:33 CDT 2024 on pts/0
+[svczena@pwauslorbora20 ~]$ cd /opt/ctm/ctm/scripts
+[svczena@pwauslorbora20 scripts]$ ll
+total 228
+-rwxr-xr-x 1 svczena zenagrp  1776 Sep  1  2021 ag_check_jobs
+-rwxr-xr-x 1 svczena zenagrp 12690 Sep  1  2021 ag_diag_comm
+-rwxr-xr-x 1 svczena zenagrp  1698 Sep  1  2021 archive_bmcjava.sh
+-rwxr-xr-x 1 svczena zenagrp  3003 Sep  1  2021 archive.sh
+-rwxr-xr-x 1 svczena zenagrp  3025 Sep  1  2021 check_nfs_can_run.sh
+-rwxr-xr-x 1 svczena zenagrp  2505 Sep  1  2021 check_os_version
+-rwxr-xr-x 1 svczena zenagrp  2311 Sep  1  2021 get_cpu.sh
+-rwxr-xr-x 1 svczena zenagrp  2369 Sep  1  2021 handle_jre_downgrade.sh
+-rwxr-xr-x 1 svczena zenagrp  3559 Sep  1  2021 io_benchmark.sh
+-rwxr-xr-x 1 svczena zenagrp  4202 Sep  1  2021 jre_validation.pl
+-rwxr-xr-x 1 svczena zenagrp   446 Sep  1  2021 jre_validation.sh
+-rwxr-xr-x 1 svczena zenagrp  4621 Sep  1  2021 keygen.sh
+-rwxr-xr-x 1 svczena zenagrp  5517 Sep  1  2021 merge_dailylog.pl
+-rwxr-xr-x 1 svczena zenagrp   982 Sep  1  2021 merge_dailylog.sh
+-rwxr-xr-x 1 svczena zenagrp  2087 Jul 10 15:49 rc.agent_user
+-rwxr-xr-x 1 svczena zenagrp 29128 Sep  1  2021 set_agent_mode
+-rwxr-xr-x 1 svczena zenagrp 16692 Sep  1  2021 shagent
+-rwxr-xr-x 1 svczena zenagrp  3361 Sep  1  2021 sharch
+-rwxr-xr-x 1 svczena zenagrp 31134 Sep  1  2021 shut-ag
+-rwxr-xr-x 1 svczena zenagrp 55826 Sep  1  2021 start-ag
+[svczena@pwauslorbora20 scripts]$ ./start-ag
+
+ Enter Control-M/Agent UNIX username [svczena]:
+
+ Enter Control-M/Agent Process Name <AG|AT|AR|AGJ|ALL> [ALL]:
+
+
+Starting the agent as 'svczena' user
+
+Control-M/Agent java process is already running. Pid=4148383, Port=25453
+Control-M/Agent Router is already running.
+Control-M/Agent Listener is already running.
+Control-M/Agent Tracker is already running.
+[svczena@pwauslorbora20 scripts]$ ./ag_diag_comm
+
+2024-07-10 16:44:10
+
+This procedure runs for about 30 seconds. Please wait
+
+Control-M/Agent Communication Diagnostic Report
+-----------------------------------------------
+
+ Agent User Name                : svczena
+ Agent Directory                : /opt/ctm/ctm
+ Agent Platform Architecture    : Linux
+ Agent Version                  : 9.0.20.200
+ Agent Host Name                : pwauslorbora20
+ Logical Agent Name             : pwauslorbora20.app.hcscint.net
+ Listen to Network Interface    : *ANY
+ Server Host Name               : PWAUSWAPP02.ADHCSCINT.NET
+ Authorized Servers Host Names  : pwauswapp02.adhcscint.net pwauswapp03.adhcscint.net
+ Server-to-Agent Port Number    : 7006
+ Agent-to-Server Port Number    : 7005
+ Server-Agent Protocol Version  : 13
+ Server-Agent Comm. Protocol    : TCP
+ Server-Agent Connection mode   : Persistent
+ Allow agent to init connection : Yes
+ Unix Ping to Server Platform   : Succeeded
+ Agent Ping to Control-M/Server : Succeeded
+
+ Agent processes status
+ ======================
+ Agent Router                   : Running as svczena (4148612)
+ Java services                  : ["housekeeping","ssh-courier"] on port 25453
+ Agent Listener                 : Running as svczena (4148696)
+ Agent Tracker                  : Running as svczena (4148840)
+ Agent Tracker-Worker           : Running as svczena (4148850)
+
+[svczena@pwauslorbora20 scripts]$ date
+Wed Jul 10 16:44:18 CDT 2024
+
+
+
+
+

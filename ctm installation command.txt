@@ -1,0 +1,104 @@
+wget http://pwauslsatc01.app.hcscint.net/pub/ks/depot/ctm/java-21-openjdk-21.0.5.0.11-1.portable.jre.x86_64.tar.xz
+wget http://taznslsatc01.app.test.hcscint.net/pub/ks/depot/ctm/java-11-openjdk-11.0.17.0.8-2.portable.jre.el.x86_64.tar.xz .
+
+a46719052
+
+chown -v a46719052:a46719052 java
+
+cp accounts.xml /opt/zena/accounts.xml_bkp031525
+
+
+
+ 935  wget http://pwauslsatc01.app.hcscint.net/pub/ks/depot/ctm/java-21-openjdk-21.0.5.0.11-1.portable.jre.x86_64.tar.xz
+  936  ls -ltr | grep -i java
+  937  cp java-21-openjdk-21.0.5.0.11-1.portable.jre.x86_64.tar.xz /opt/ctm
+  938  cd
+  939  cd /opt/ctm
+  940  ll
+  941  mkdir -p java/jre
+  942  cp java-21-openjdk-21.0.5.0.11-1.portable.jre.x86_64.tar.xz /opt/ctm/java/jre
+  943  cd
+  944  cd /opt/ctm/java/jre
+  945  ll
+  946  tar -xvf java-21-openjdk-21.0.5.0.11-1.portable.jre.x86_64.tar.xz
+  947  java --version
+  948  cd java-21-openjdk-21.0.5.0.11-1.portable.jre.x86_64/bin/
+  949  ./java --version
+  950  cd/
+  951  cd /
+  952  cd
+  953  cd /opt/zena
+  954  ls -latr
+  955  cd
+  956  cd /opt/ctm
+  957  ls -latr
+  958  cd .
+  959  cd ..
+  960  ll
+  961  ls -latr
+  962  cd
+  963  cd /
+  964  ll
+  965  ls -latr
+  966  cd
+  967  cd /opt/ctm
+  968  cd
+  969  su -a46719052
+  970  su - a46719052
+  971  :q
+  972  cd /opt/ctm
+  973  ll
+  974  rm java-21-openjdk-21.0.5.0.11-1.portable.jre.x86_64.tar.xz
+  975  rm MQL.9.0.21.200_Linux-x86_64.BIN
+  976  rm Setup_files
+  977  rm -rf Setup_files
+  978  rm setup.sh
+  979  ll
+  980  tar -xvf DRFZ4.9.0.21.200_Linux-x86_64.z
+  981  export BMC_INST_JAVA_HOME=/opt/ctm/java/jre/java-21-openjdk-21.0.5.0.11-1.portable.jre.x86_64
+  982  su - a46719052
+  983  ls -latr
+  984  cd
+  985  cd /
+  986  ll
+  987  ls -latr
+  988  cd /home
+  989  ll
+  990  ls -latr
+  991  cd
+  992  su - a46719052
+  993  chown -v a46719052:a46719052 /opt/ctm
+  994  ls -ld
+  995  cd /opt/ctm
+  996  ls -latr
+  997  ls -ld
+  998  cd
+  999  su - a46719052
+ 1000  cd /opt/ctm
+ 1001  chown -R a46719052:a46719052 java
+ 1002  su - a46719052
+ 1003  export
+ 1004  su - a46719052
+ 1005  ./setup.sh
+ 1006  ls -latr
+ 1007  ps -ef | grep ctm
+ 1008  ll
+ 1009  ls -ltr
+ 1010  cd
+ 1011  cd /opt/opt/scripts
+ 1012  cd /opt/ctm/scripts
+ 1013  cd /opt/ctm
+ 1014  ll
+ 1015  ./stop-ag.sh
+ 1016  ls -latr
+ 1017  cd ctm
+ 1018  ls -latr
+ 1019  cd scripts
+ 1020  ll
+ 1021  ./shut-ag
+ 1022  ./start-ag
+ 1023  cd
+ 1024  df -h /opt/ctm
+ 1025  vgs
+ 1026  history
+[root@pwausldsapp07 ~]#
